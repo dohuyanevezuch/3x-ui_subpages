@@ -1,0 +1,1833 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="color-scheme" content="dark light">
+<title>Подписка</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%231ed760'/%3E%3Cpath d='M12 9l12 7-12 7z' fill='%23000'/%3E%3C/svg%3E">
+<style>
+:root{--bg:#0b0b0e;--sb:#000;--pn:#15151a;--pn2:#1d1d24;--hv:#26262f;--ink:#f4f4f6;--mu:#a2a2b0;--fa:#5b5b6a;--ac:#1ed760;--on-ac:#04140a;--ln:rgba(255,255,255,.08);--ok:#1ed760;--warn:#ffb020;--bad:#ff5d6c;--hue:150;
+--f:"Avenir Next","Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;--mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;color-scheme:dark}
+html[data-theme="light"]{--bg:#f4f4f7;--sb:#e9e9ef;--pn:#fff;--pn2:#f0f0f5;--hv:#e6e6ee;--ink:#14141a;--mu:#5f5f70;--fa:#a9a9b8;--ac:#12b24a;--on-ac:#fff;--ln:rgba(0,0,0,.09);--ok:#12924a;--warn:#b86e00;--bad:#d4313f;color-scheme:light}
+*{box-sizing:border-box;margin:0}html{-webkit-text-size-adjust:100%}
+body{font:15px/1.5 var(--f);color:var(--ink);background:var(--sb);min-height:100vh;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}a{color:inherit;text-decoration:none}
+::selection{background:var(--ac);color:var(--on-ac)}.mono{font-family:var(--mono)}
+.app{display:grid;grid-template-columns:268px minmax(0,1fr);gap:8px;padding:8px 8px 96px;min-height:100vh}
+.side{background:var(--bg);border-radius:12px;padding:16px 10px;position:sticky;top:8px;height:calc(100vh - 112px);overflow:auto;scrollbar-width:thin}
+.logo{display:flex;align-items:center;gap:10px;padding:2px 8px 16px}
+.logo i{width:34px;height:34px;border-radius:50%;background:var(--ac);display:grid;place-items:center;flex:none}
+.logo i svg{width:15px;height:15px;fill:var(--on-ac);margin-left:2px}
+.logo b{font-weight:800;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}.logo small{display:block;font:500 11px var(--mono);color:var(--mu)}
+.lib{display:flex;align-items:center;gap:8px;padding:6px 8px 10px;color:var(--mu);font-weight:700;font-size:13px}
+.lib svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.pl{display:flex;align-items:center;gap:11px;width:100%;padding:7px 8px;border-radius:8px;text-align:left;transition:.15s;min-width:0}
+.pl:hover{background:var(--hv)}.pl.on{background:var(--pn2)}
+.cov{width:46px;height:46px;border-radius:6px;display:grid;place-items:center;flex:none;background:linear-gradient(135deg,hsl(var(--h) 70% 45%),hsl(calc(var(--h) + 50) 70% 30%));position:relative;overflow:hidden}
+.cov .flag,.cov .flag-e{width:30px;height:21px;border-radius:3px;box-shadow:0 2px 6px rgba(0,0,0,.4);font-size:17px;display:grid;place-items:center}
+.cov.all svg{width:22px;height:22px;fill:#fff}
+.pl span.t{min-width:0;flex:1}.pl b{display:block;font-weight:700;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pl small{display:block;color:var(--mu);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pl.on b{color:var(--ac)}
+.main{background:var(--bg);border-radius:12px;min-width:0;overflow:hidden;position:relative}
+.main::before{content:"";position:absolute;left:0;right:0;top:0;height:420px;background:linear-gradient(180deg,hsl(var(--hue) 55% 30% / .85),transparent);pointer-events:none;transition:.6s}
+html[data-theme="light"] .main::before{background:linear-gradient(180deg,hsl(var(--hue) 70% 70% / .6),transparent)}
+.in{position:relative;padding:0 24px 30px}
+.bar{display:flex;align-items:center;gap:10px;padding:18px 0 22px}
+.bar .sp{flex:1}
+.rb{width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,.4);display:grid;place-items:center;color:#fff;transition:.2s;flex:none}
+html[data-theme="light"] .rb{background:rgba(255,255,255,.7);color:var(--ink)}
+.rb:hover{transform:scale(1.08)}.rb svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+html[data-theme="dark"] .t-moon,html[data-theme="light"] .t-sun{display:none}
+.announce{margin:0 0 16px;padding:11px 16px;border-radius:8px;background:var(--ac);color:var(--on-ac);font-weight:700}
+.hero{display:flex;gap:24px;align-items:flex-end}
+.bigcov{width:200px;height:200px;border-radius:8px;flex:none;display:grid;place-items:center;box-shadow:0 18px 40px rgba(0,0,0,.5);background:linear-gradient(135deg,hsl(var(--h) 70% 45%),hsl(calc(var(--h) + 50) 70% 28%))}
+.bigcov svg{width:90px;height:90px;fill:rgba(255,255,255,.92)}
+.bigcov .flag{width:110px;height:76px;border-radius:6px;box-shadow:0 8px 20px rgba(0,0,0,.4)}.bigcov .flag-e{font-size:64px}
+.hero .tx{min-width:0;flex:1}
+.kick{font:800 12px var(--f);text-transform:uppercase;letter-spacing:.1em}
+.hero h1{font:900 clamp(34px,6vw,76px)/1.02 var(--f);letter-spacing:-.04em;margin:6px 0 12px;word-break:break-word}
+.meta{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center;font-size:14px;color:var(--mu)}
+.meta b{color:var(--ink)}.meta .d{opacity:.5}
+.ctl{display:flex;align-items:center;gap:14px;padding:22px 0 8px;flex-wrap:wrap}
+.play{width:56px;height:56px;border-radius:50%;background:var(--ac);color:var(--on-ac);display:grid;place-items:center;transition:.15s;flex:none}
+.play:hover{transform:scale(1.06)}.play:active{transform:scale(.96)}
+.play svg{width:24px;height:24px;fill:currentColor;margin-left:3px}
+.play.ok svg{display:none}.play.ok::before{content:"✓";font-size:24px;font-weight:900;margin:0}
+.pill{height:36px;padding:0 16px;border-radius:99px;border:1px solid var(--fa);font-weight:700;font-size:13.5px;transition:.15s;white-space:nowrap}
+.pill:hover{border-color:var(--ink);transform:scale(1.03)}
+.fm{display:flex;gap:6px;flex-wrap:wrap}.fm button{height:32px;padding:0 13px;border-radius:99px;background:var(--pn2);font-weight:700;font-size:13px;color:var(--mu);transition:.15s}.fm button.on{background:var(--ink);color:var(--bg)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:20px}
+.st{background:var(--pn);border-radius:10px;padding:14px 16px;min-width:0;transition:.2s}.st:hover{background:var(--pn2)}
+.st small{display:block;font:700 11px var(--f);text-transform:uppercase;letter-spacing:.08em;color:var(--mu)}
+.st b{display:block;font:800 22px/1.25 var(--f);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.st b.mono{font-size:19px}
+.sh{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:32px 0 12px}
+.sh h2{font:800 22px var(--f);letter-spacing:-.02em}.sh span{color:var(--mu);font-size:13px;font-weight:600}
+.apps{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.app-c{display:flex;align-items:center;gap:11px;padding:10px;background:var(--pn);border-radius:8px;transition:.2s;min-width:0}
+.app-c:hover{background:var(--hv);transform:translateY(-2px)}
+.app-c b{font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ai{width:34px;height:34px;border-radius:7px;display:grid;place-items:center;flex:none}
+.ai svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+.search{flex:1 1 220px;height:44px;border-radius:99px;background:var(--pn2);display:flex;align-items:center;gap:10px;padding:0 16px;border:2px solid transparent;transition:.2s}
+.search:focus-within{border-color:var(--ink)}.search svg{width:18px;height:18px;stroke:var(--mu);fill:none;stroke-width:2.2;stroke-linecap:round;flex:none}
+.search input{flex:1;min-width:0;background:none;border:0;outline:0;color:var(--ink);font:inherit}
+.search kbd{font:700 11px var(--mono);color:var(--mu);border:1px solid var(--fa);border-radius:5px;padding:0 6px}.search:focus-within kbd{display:none}
+.filters{display:flex;flex-direction:column;gap:7px;margin-bottom:10px}
+.crow{display:flex;align-items:center;gap:10px}.cl{font:800 11px var(--f);letter-spacing:.1em;text-transform:uppercase;color:var(--mu);width:84px;flex:none}
+.cw{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex-wrap:wrap}.cw::-webkit-scrollbar{display:none}
+.fchip{height:30px;padding:0 13px;border-radius:99px;background:var(--pn2);font:700 12.5px var(--f);color:var(--mu);display:inline-flex;align-items:center;gap:7px;transition:.15s;flex:none}
+.fchip:hover{color:var(--ink)}.fchip.on{background:var(--ink);color:var(--bg)}.fchip.dim{opacity:.4}
+.fchip i{width:8px;height:8px;border-radius:50%;display:block}.fchip em{font-style:normal;opacity:.6;font-size:11.5px}
+.th{display:grid;grid-template-columns:36px minmax(0,1fr) 90px 110px;gap:12px;padding:6px 14px;border-bottom:1px solid var(--ln);color:var(--mu);font:700 11.5px var(--f);text-transform:uppercase;letter-spacing:.1em;margin-top:6px}
+.tr{border-radius:8px;transition:background .12s}.tr:hover{background:var(--pn2)}
+.tm{display:grid;grid-template-columns:36px minmax(0,1fr) 90px 110px;gap:12px;align-items:center;padding:8px 14px}
+.no{color:var(--mu);font:600 14px var(--mono);text-align:center;position:relative;height:20px;line-height:20px}
+.no s{text-decoration:none;display:block}.no svg{display:none;width:15px;height:15px;fill:var(--ink);position:absolute;left:10px;top:3px}
+.tr:hover .no s{display:none}.tr:hover .no svg{display:block}
+.tt{display:flex;align-items:center;gap:12px;min-width:0;cursor:pointer}
+.tdot{width:40px;height:40px;border-radius:6px;display:grid;place-items:center;flex:none;font:900 11px var(--f);letter-spacing:.04em;color:#fff;background:var(--pc)}
+.tn{min-width:0;flex:1}.tn b{display:block;font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tn .tg{display:flex;gap:6px;flex-wrap:wrap;margin-top:1px;color:var(--mu);font-size:12.5px;align-items:center}
+.tag{font:700 10.5px var(--f);text-transform:uppercase;letter-spacing:.06em;padding:1px 6px;border-radius:4px;background:var(--hv);color:var(--mu)}
+.tag.sec-reality{background:color-mix(in srgb,var(--ac) 22%,transparent);color:var(--ac)}.tag.sec-tls{background:color-mix(in srgb,var(--ok) 16%,transparent);color:var(--ok)}.tag.sec-none{background:color-mix(in srgb,var(--warn) 18%,transparent);color:var(--warn)}
+.pt{font:600 14px var(--mono);color:var(--mu)}
+.ab{display:flex;gap:2px;justify-content:flex-end}
+.cbtn{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;color:var(--mu);transition:.15s;flex:none}
+.cbtn:hover{color:var(--ink);background:var(--hv);transform:scale(1.08)}
+.cbtn svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.cbtn.ok{background:var(--ac);color:var(--on-ac)}.cbtn.ok svg{display:none}.cbtn.ok::before{content:"✓";font-weight:900}
+.tr.open .cbtn.tg svg{transform:rotate(180deg)}.cbtn.tg svg{transition:transform .25s}
+.detail{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s cubic-bezier(.3,.8,.2,1)}.tr.open .detail{grid-template-rows:1fr}
+.detail .inn{overflow:hidden;min-height:0}.detail .pad{padding:2px 14px 14px 62px}
+.kv{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px 18px}.kv div{min-width:0}
+.kv span{display:block;font:700 10.5px var(--f);color:var(--mu);text-transform:uppercase;letter-spacing:.08em}.kv b{display:block;font:600 12.5px var(--mono);word-break:break-all}
+.rawl{margin-top:10px;font:500 11px/1.5 var(--mono);color:var(--mu);word-break:break-all;background:var(--pn);border-radius:8px;padding:8px 10px;max-height:4.6em;overflow:hidden}
+.gh{padding:16px 14px 4px;display:flex;align-items:center;gap:10px;font:800 15px var(--f)}.gh .flag{width:24px;height:17px;border-radius:3px}.gh small{color:var(--mu);font-weight:600;font-size:12.5px}
+.empty{padding:36px 16px;text-align:center;color:var(--mu);font-weight:650}
+/* now playing */
+.np{position:fixed;left:8px;right:8px;bottom:8px;z-index:50;display:grid;grid-template-columns:minmax(220px,1fr) minmax(300px,2fr) minmax(220px,1fr);gap:16px;align-items:center;background:var(--pn);border-radius:12px;padding:10px 16px;box-shadow:0 -8px 40px rgba(0,0,0,.35);border:1px solid var(--ln)}
+.np .l{display:flex;align-items:center;gap:12px;min-width:0}.np .cov{width:54px;height:54px}
+.np .l b{display:block;font-weight:700;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.np .l small{display:block;color:var(--mu);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.np .c{min-width:0}
+.seek{display:flex;align-items:center;gap:10px;font:500 11.5px var(--mono);color:var(--mu)}
+.seek span{flex:none;min-width:48px;text-align:center}
+.sk{flex:1;height:5px;border-radius:5px;background:var(--hv);position:relative;overflow:visible}
+.sk i{display:block;height:100%;border-radius:5px;background:var(--ink);width:0;transition:width 1.6s cubic-bezier(.3,.8,.2,1);position:relative}
+.sk i::after{content:"";position:absolute;right:-6px;top:50%;width:12px;height:12px;border-radius:50%;background:var(--ink);transform:translateY(-50%);box-shadow:0 1px 4px rgba(0,0,0,.4)}
+.sk:hover i{background:var(--ac)}.sk.warn i{background:var(--warn)}.sk.bad i{background:var(--bad)}
+.np .r{display:flex;align-items:center;gap:6px;justify-content:flex-end}
+.np .cl2{font:700 12px var(--f);color:var(--mu);margin-right:4px;text-align:right;white-space:nowrap}
+.eqb{display:flex;gap:2px;align-items:flex-end;height:14px;margin-right:4px}.eqb i{width:3px;background:var(--ac);border-radius:1px;animation:eq 1s ease-in-out infinite}
+.eqb i:nth-child(2){animation-delay:.2s}.eqb i:nth-child(3){animation-delay:.4s}.eqb i:nth-child(4){animation-delay:.1s}
+@keyframes eq{0%,100%{height:3px}50%{height:14px}}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;place-items:center;z-index:80;padding:18px}.ov.on{display:grid;animation:fadei .2s both}@keyframes fadei{from{opacity:0}}
+.modal{width:min(360px,100%);background:var(--pn);border-radius:14px;padding:22px;text-align:center;animation:pop .3s cubic-bezier(.2,1.2,.3,1) both}@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.96)}}
+.modal h3{font:800 17px var(--f);display:flex;gap:10px;align-items:center;justify-content:center}.pdot2{width:11px;height:11px;border-radius:50%;display:inline-block}
+.modal p{font:500 11.5px/1.5 var(--mono);color:var(--mu);margin:8px 0 14px;word-break:break-all;max-height:3.4em;overflow:hidden}
+.qrbox{background:#fff;border-radius:10px;padding:12px;display:inline-block}.qrbox canvas{display:block;width:240px;height:240px;max-width:100%;image-rendering:pixelated}
+.row2{display:flex;gap:8px;justify-content:center;margin-top:16px;flex-wrap:wrap}
+.btn{height:40px;padding:0 20px;border-radius:99px;background:var(--ink);color:var(--bg);font-weight:800;font-size:14px;transition:.15s}.btn:hover{transform:scale(1.04)}
+.btn.ac{background:var(--ac);color:var(--on-ac)}.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--fa)}.btn.ok{background:var(--ok);color:#fff}
+.toast{position:fixed;left:50%;bottom:104px;opacity:0;pointer-events:none;z-index:90;transform:translate(-50%,12px);background:var(--ink);color:var(--bg);padding:10px 20px;border-radius:8px;font-weight:700;font-size:14px;transition:.25s;white-space:nowrap;box-shadow:0 8px 30px rgba(0,0,0,.4)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media (max-width:980px){
+  .app{grid-template-columns:minmax(0,1fr);padding-bottom:84px}
+  .side{position:static;height:auto;padding:12px 10px 8px;overflow:visible}
+  .logo{padding-bottom:10px}.lib{display:none}
+  #pls{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}#pls::-webkit-scrollbar{display:none}
+  .pl{width:auto;flex:none;padding:5px 12px 5px 5px;border-radius:99px;background:var(--pn2)}.pl .cov{width:32px;height:32px;border-radius:50%}.pl .cov .flag,.pl .cov .flag-e{width:22px;height:15px;font-size:12px}.pl small{display:none}.pl b{max-width:130px;font-size:13.5px}
+  .np{grid-template-columns:minmax(0,1fr) auto}.np .c{grid-column:1/-1;grid-row:2}.np .r .cl2,.np .eqb{display:none}
+}
+@media (max-width:640px){
+  .app{padding:0 0 84px;gap:0}.side,.main{border-radius:0}
+  .in{padding:0 14px 24px}.bar{padding:12px 0 14px}
+  .hero{flex-direction:column;align-items:flex-start;gap:14px}.bigcov{width:130px;height:130px}.bigcov svg{width:60px;height:60px}.bigcov .flag{width:76px;height:52px}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}.st b{font-size:19px}
+  .ctl{gap:10px}.play{width:52px;height:52px}
+  .search{flex-basis:100%;height:48px}.search kbd{display:none}.search input{font-size:16px}
+  .crow{flex-direction:column;align-items:stretch;gap:5px}.cl{width:auto}.cw{flex-wrap:nowrap}
+  .th{display:none}
+  .tm{grid-template-columns:minmax(0,1fr) auto;gap:6px 6px;padding:8px 6px}
+  .no,.pt{display:none}
+  .tm .ab .cbtn.tg{display:none}.cbtn{width:40px;height:40px}
+  .tn .tg .pt2{font-family:var(--mono)}
+  .detail .pad{padding:2px 8px 12px}.kv{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .toast{bottom:112px}
+  .np{padding:8px 12px 10px;gap:6px 10px;bottom:0;left:0;right:0;border-radius:14px 14px 0 0;padding-bottom:calc(10px + env(safe-area-inset-bottom))}.np .cov{width:44px;height:44px}
+  .seek span{min-width:40px;font-size:10.5px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side"><div class="logo"><i><svg viewBox="0 0 24 24"><path d="M6 3l15 9-15 9z"/></svg></i><div style="min-width:0"><b id="title">Подписка</b><small id="subid"></small></div></div>
+<div class="lib"><svg viewBox="0 0 24 24"><path d="M4 4v16M9 4v16M14 6l6 14"/></svg>Плейлисты · узлы</div><div id="pls"></div></aside>
+<main class="main"><div class="in">
+ <div class="bar"><span class="sp"></span><a class="rb" id="support" href="#" target="_blank" rel="noopener noreferrer" hidden title="Поддержка" aria-label="Поддержка"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 01-11.6 7.1L4 20l1-4.6A8 8 0 1121 12z"/></svg></a>
+ <button class="rb" id="theme" aria-label="Сменить тему"><svg class="t-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="t-moon" viewBox="0 0 24 24"><path d="M21 13A9 9 0 1111 3a7 7 0 0010 10z"/></svg></button></div>
+ <div id="announce"></div>
+ <section id="hero"></section>
+ <div class="sh"><h2>Открыть в приложении</h2><span>один тап — и всё настроено</span></div><div class="apps" id="apps"></div>
+ <div class="sh"><h2 id="lh">Все треки</h2><span id="invsum"></span></div>
+ <div class="toolbar"><label class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="q" type="search" placeholder="Что будем слушать? Страна, узел, порт…" autocomplete="off"><kbd>/</kbd></label>
+  <button class="cbtn" id="copyall" title="Скопировать все ссылки" aria-label="Скопировать все ссылки"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 012-2h9"/></svg></button></div>
+ <div class="filters" id="chips"></div>
+ <div class="th"><span style="text-align:center">#</span><span>Название</span><span>Порт</span><span></span></div>
+ <div id="groups"></div>
+</div></main></div>
+<div class="np" id="np"></div>
+<div class="ov" id="ov"><div class="modal"><h3 id="mt"></h3><p id="ml"></p><div class="qrbox"><canvas id="qr" width="260" height="260"></canvas></div>
+ <div class="row2"><button class="btn ac" id="mcopy"><span>Копировать</span></button><button class="btn ghost" id="mdl">PNG</button><button class="btn ghost" id="mclose">Закрыть</button></div></div></div>
+<div class="toast" id="toast"><span id="tt"></span></div>
+
+<script>
+/* Данные панели 3x-ui (подставляются шаблоном Go) */
+var PANEL = {
+  sId: {{ .sId }},
+  enabled: {{ .enabled }},
+  download: {{ .download }},
+  upload: {{ .upload }},
+  total: {{ .total }},
+  used: {{ .used }},
+  remained: {{ .remained }},
+  expire: {{ .expire }},
+  lastOnline: {{ .lastOnline }},
+  isOnline: {{ .isOnline }},
+  downloadByte: {{ .downloadByte }},
+  uploadByte: {{ .uploadByte }},
+  totalByte: {{ .totalByte }},
+  subUrl: {{ .subUrl }},
+  subJsonUrl: {{ .subJsonUrl }},
+  subClashUrl: {{ .subClashUrl }},
+  subTitle: {{ .subTitle }},
+  subSupportUrl: {{ .subSupportUrl }},
+  links: {{ .links }},
+  emails: {{ .emails }},
+  datepicker: {{ .datepicker }},
+  announce: {{ .announce }}
+};
+</script>
+<script>
+var __qr=(function(){var M={},C={};function R(n){n=n.replace("./","");if(C[n])return C[n].exports;var m={exports:{}};C[n]=m;M[n](m,m.exports,R);return m.exports}
+M['QR8bitByte']=function(module,exports,require){var QRMode = require('./QRMode');
+
+function QR8bitByte(data) {
+	this.mode = QRMode.MODE_8BIT_BYTE;
+	this.data = data;
+}
+
+QR8bitByte.prototype = {
+
+	getLength : function() {
+		return this.data.length;
+	},
+	
+	write : function(buffer) {
+		for (var i = 0; i < this.data.length; i++) {
+
+			buffer.put(this.data.charCodeAt(i), 8);
+		}
+	}
+};
+
+module.exports = QR8bitByte;
+};
+M['QRBitBuffer']=function(module,exports,require){function QRBitBuffer() {
+	this.buffer = [];
+	this.length = 0;
+}
+
+QRBitBuffer.prototype = {
+
+	get : function(index) {
+		var bufIndex = Math.floor(index / 8);
+		return ( (this.buffer[bufIndex] >>> (7 - index % 8) ) & 1) == 1;
+	},
+	
+	put : function(num, length) {
+		for (var i = 0; i < length; i++) {
+			this.putBit( ( (num >>> (length - i - 1) ) & 1) == 1);
+		}
+	},
+	
+	getLengthInBits : function() {
+		return this.length;
+	},
+	
+	putBit : function(bit) {
+	
+		var bufIndex = Math.floor(this.length / 8);
+		if (this.buffer.length <= bufIndex) {
+			this.buffer.push(0);
+		}
+	
+		if (bit) {
+			this.buffer[bufIndex] |= (0x80 >>> (this.length % 8) );
+		}
+	
+		this.length++;
+	}
+};
+
+module.exports = QRBitBuffer;
+};
+M['QRErrorCorrectLevel']=function(module,exports,require){module.exports = {
+	L : 1,
+	M : 0,
+	Q : 3,
+	H : 2
+};
+
+};
+M['QRMaskPattern']=function(module,exports,require){module.exports = {
+	PATTERN000 : 0,
+	PATTERN001 : 1,
+	PATTERN010 : 2,
+	PATTERN011 : 3,
+	PATTERN100 : 4,
+	PATTERN101 : 5,
+	PATTERN110 : 6,
+	PATTERN111 : 7
+};
+};
+M['QRMath']=function(module,exports,require){var QRMath = {
+
+	glog : function(n) {
+	
+		if (n < 1) {
+			throw new Error("glog(" + n + ")");
+		}
+		
+		return QRMath.LOG_TABLE[n];
+	},
+	
+	gexp : function(n) {
+	
+		while (n < 0) {
+			n += 255;
+		}
+	
+		while (n >= 256) {
+			n -= 255;
+		}
+	
+		return QRMath.EXP_TABLE[n];
+	},
+	
+	EXP_TABLE : new Array(256),
+	
+	LOG_TABLE : new Array(256)
+
+};
+	
+for (var i = 0; i < 8; i++) {
+	QRMath.EXP_TABLE[i] = 1 << i;
+}
+for (var i = 8; i < 256; i++) {
+	QRMath.EXP_TABLE[i] = QRMath.EXP_TABLE[i - 4]
+		^ QRMath.EXP_TABLE[i - 5]
+		^ QRMath.EXP_TABLE[i - 6]
+		^ QRMath.EXP_TABLE[i - 8];
+}
+for (var i = 0; i < 255; i++) {
+	QRMath.LOG_TABLE[QRMath.EXP_TABLE[i] ] = i;
+}
+
+module.exports = QRMath;
+};
+M['QRMode']=function(module,exports,require){module.exports = {
+    MODE_NUMBER :       1 << 0,
+    MODE_ALPHA_NUM :    1 << 1,
+    MODE_8BIT_BYTE :    1 << 2,
+    MODE_KANJI :        1 << 3
+};
+};
+M['QRPolynomial']=function(module,exports,require){var QRMath = require('./QRMath');
+
+function QRPolynomial(num, shift) {
+	if (num.length === undefined) {
+		throw new Error(num.length + "/" + shift);
+	}
+
+	var offset = 0;
+
+	while (offset < num.length && num[offset] === 0) {
+		offset++;
+	}
+
+	this.num = new Array(num.length - offset + shift);
+	for (var i = 0; i < num.length - offset; i++) {
+		this.num[i] = num[i + offset];
+	}
+}
+
+QRPolynomial.prototype = {
+
+	get : function(index) {
+		return this.num[index];
+	},
+	
+	getLength : function() {
+		return this.num.length;
+	},
+	
+	multiply : function(e) {
+	
+		var num = new Array(this.getLength() + e.getLength() - 1);
+	
+		for (var i = 0; i < this.getLength(); i++) {
+			for (var j = 0; j < e.getLength(); j++) {
+				num[i + j] ^= QRMath.gexp(QRMath.glog(this.get(i) ) + QRMath.glog(e.get(j) ) );
+			}
+		}
+	
+		return new QRPolynomial(num, 0);
+	},
+	
+	mod : function(e) {
+	
+		if (this.getLength() - e.getLength() < 0) {
+			return this;
+		}
+	
+		var ratio = QRMath.glog(this.get(0) ) - QRMath.glog(e.get(0) );
+	
+		var num = new Array(this.getLength() );
+		
+		for (var i = 0; i < this.getLength(); i++) {
+			num[i] = this.get(i);
+		}
+		
+		for (var x = 0; x < e.getLength(); x++) {
+			num[x] ^= QRMath.gexp(QRMath.glog(e.get(x) ) + ratio);
+		}
+
+		return new QRPolynomial(num, 0).mod(e);
+	}
+};
+
+module.exports = QRPolynomial;
+};
+M['QRRSBlock']=function(module,exports,require){var QRErrorCorrectLevel = require('./QRErrorCorrectLevel');
+
+function QRRSBlock(totalCount, dataCount) {
+	this.totalCount = totalCount;
+	this.dataCount  = dataCount;
+}
+
+QRRSBlock.RS_BLOCK_TABLE = [
+
+
+
+
+
+	[1, 26, 19],
+	[1, 26, 16],
+	[1, 26, 13],
+	[1, 26, 9],
+
+	[1, 44, 34],
+	[1, 44, 28],
+	[1, 44, 22],
+	[1, 44, 16],
+
+	[1, 70, 55],
+	[1, 70, 44],
+	[2, 35, 17],
+	[2, 35, 13],
+
+	[1, 100, 80],
+	[2, 50, 32],
+	[2, 50, 24],
+	[4, 25, 9],
+
+	[1, 134, 108],
+	[2, 67, 43],
+	[2, 33, 15, 2, 34, 16],
+	[2, 33, 11, 2, 34, 12],
+
+	[2, 86, 68],
+	[4, 43, 27],
+	[4, 43, 19],
+	[4, 43, 15],
+
+	[2, 98, 78],
+	[4, 49, 31],
+	[2, 32, 14, 4, 33, 15],
+	[4, 39, 13, 1, 40, 14],
+
+	[2, 121, 97],
+	[2, 60, 38, 2, 61, 39],
+	[4, 40, 18, 2, 41, 19],
+	[4, 40, 14, 2, 41, 15],
+
+	[2, 146, 116],
+	[3, 58, 36, 2, 59, 37],
+	[4, 36, 16, 4, 37, 17],
+	[4, 36, 12, 4, 37, 13],
+
+	[2, 86, 68, 2, 87, 69],
+	[4, 69, 43, 1, 70, 44],
+	[6, 43, 19, 2, 44, 20],
+	[6, 43, 15, 2, 44, 16],
+
+	[4, 101, 81],
+	[1, 80, 50, 4, 81, 51],
+	[4, 50, 22, 4, 51, 23],
+	[3, 36, 12, 8, 37, 13],
+
+	[2, 116, 92, 2, 117, 93],
+	[6, 58, 36, 2, 59, 37],
+	[4, 46, 20, 6, 47, 21],
+	[7, 42, 14, 4, 43, 15],
+
+	[4, 133, 107],
+	[8, 59, 37, 1, 60, 38],
+	[8, 44, 20, 4, 45, 21],
+	[12, 33, 11, 4, 34, 12],
+
+	[3, 145, 115, 1, 146, 116],
+	[4, 64, 40, 5, 65, 41],
+	[11, 36, 16, 5, 37, 17],
+	[11, 36, 12, 5, 37, 13],
+
+	[5, 109, 87, 1, 110, 88],
+	[5, 65, 41, 5, 66, 42],
+	[5, 54, 24, 7, 55, 25],
+	[11, 36, 12],
+
+	[5, 122, 98, 1, 123, 99],
+	[7, 73, 45, 3, 74, 46],
+	[15, 43, 19, 2, 44, 20],
+	[3, 45, 15, 13, 46, 16],
+
+	[1, 135, 107, 5, 136, 108],
+	[10, 74, 46, 1, 75, 47],
+	[1, 50, 22, 15, 51, 23],
+	[2, 42, 14, 17, 43, 15],
+
+	[5, 150, 120, 1, 151, 121],
+	[9, 69, 43, 4, 70, 44],
+	[17, 50, 22, 1, 51, 23],
+	[2, 42, 14, 19, 43, 15],
+
+	[3, 141, 113, 4, 142, 114],
+	[3, 70, 44, 11, 71, 45],
+	[17, 47, 21, 4, 48, 22],
+	[9, 39, 13, 16, 40, 14],
+
+	[3, 135, 107, 5, 136, 108],
+	[3, 67, 41, 13, 68, 42],
+	[15, 54, 24, 5, 55, 25],
+	[15, 43, 15, 10, 44, 16],
+
+	[4, 144, 116, 4, 145, 117],
+	[17, 68, 42],
+	[17, 50, 22, 6, 51, 23],
+	[19, 46, 16, 6, 47, 17],
+
+	[2, 139, 111, 7, 140, 112],
+	[17, 74, 46],
+	[7, 54, 24, 16, 55, 25],
+	[34, 37, 13],
+
+	[4, 151, 121, 5, 152, 122],
+	[4, 75, 47, 14, 76, 48],
+	[11, 54, 24, 14, 55, 25],
+	[16, 45, 15, 14, 46, 16],
+
+	[6, 147, 117, 4, 148, 118],
+	[6, 73, 45, 14, 74, 46],
+	[11, 54, 24, 16, 55, 25],
+	[30, 46, 16, 2, 47, 17],
+
+	[8, 132, 106, 4, 133, 107],
+	[8, 75, 47, 13, 76, 48],
+	[7, 54, 24, 22, 55, 25],
+	[22, 45, 15, 13, 46, 16],
+
+	[10, 142, 114, 2, 143, 115],
+	[19, 74, 46, 4, 75, 47],
+	[28, 50, 22, 6, 51, 23],
+	[33, 46, 16, 4, 47, 17],
+
+	[8, 152, 122, 4, 153, 123],
+	[22, 73, 45, 3, 74, 46],
+	[8, 53, 23, 26, 54, 24],
+	[12, 45, 15, 28, 46, 16],
+
+	[3, 147, 117, 10, 148, 118],
+	[3, 73, 45, 23, 74, 46],
+	[4, 54, 24, 31, 55, 25],
+	[11, 45, 15, 31, 46, 16],
+
+	[7, 146, 116, 7, 147, 117],
+	[21, 73, 45, 7, 74, 46],
+	[1, 53, 23, 37, 54, 24],
+	[19, 45, 15, 26, 46, 16],
+
+	[5, 145, 115, 10, 146, 116],
+	[19, 75, 47, 10, 76, 48],
+	[15, 54, 24, 25, 55, 25],
+	[23, 45, 15, 25, 46, 16],
+
+	[13, 145, 115, 3, 146, 116],
+	[2, 74, 46, 29, 75, 47],
+	[42, 54, 24, 1, 55, 25],
+	[23, 45, 15, 28, 46, 16],
+
+	[17, 145, 115],
+	[10, 74, 46, 23, 75, 47],
+	[10, 54, 24, 35, 55, 25],
+	[19, 45, 15, 35, 46, 16],
+
+	[17, 145, 115, 1, 146, 116],
+	[14, 74, 46, 21, 75, 47],
+	[29, 54, 24, 19, 55, 25],
+	[11, 45, 15, 46, 46, 16],
+
+	[13, 145, 115, 6, 146, 116],
+	[14, 74, 46, 23, 75, 47],
+	[44, 54, 24, 7, 55, 25],
+	[59, 46, 16, 1, 47, 17],
+
+	[12, 151, 121, 7, 152, 122],
+	[12, 75, 47, 26, 76, 48],
+	[39, 54, 24, 14, 55, 25],
+	[22, 45, 15, 41, 46, 16],
+
+	[6, 151, 121, 14, 152, 122],
+	[6, 75, 47, 34, 76, 48],
+	[46, 54, 24, 10, 55, 25],
+	[2, 45, 15, 64, 46, 16],
+
+	[17, 152, 122, 4, 153, 123],
+	[29, 74, 46, 14, 75, 47],
+	[49, 54, 24, 10, 55, 25],
+	[24, 45, 15, 46, 46, 16],
+
+	[4, 152, 122, 18, 153, 123],
+	[13, 74, 46, 32, 75, 47],
+	[48, 54, 24, 14, 55, 25],
+	[42, 45, 15, 32, 46, 16],
+
+	[20, 147, 117, 4, 148, 118],
+	[40, 75, 47, 7, 76, 48],
+	[43, 54, 24, 22, 55, 25],
+	[10, 45, 15, 67, 46, 16],
+
+	[19, 148, 118, 6, 149, 119],
+	[18, 75, 47, 31, 76, 48],
+	[34, 54, 24, 34, 55, 25],
+	[20, 45, 15, 61, 46, 16]
+];
+
+QRRSBlock.getRSBlocks = function(typeNumber, errorCorrectLevel) {
+	
+	var rsBlock = QRRSBlock.getRsBlockTable(typeNumber, errorCorrectLevel);
+	
+	if (rsBlock === undefined) {
+		throw new Error("bad rs block @ typeNumber:" + typeNumber + "/errorCorrectLevel:" + errorCorrectLevel);
+	}
+
+	var length = rsBlock.length / 3;
+	
+	var list = [];
+	
+	for (var i = 0; i < length; i++) {
+
+		var count = rsBlock[i * 3 + 0];
+		var totalCount = rsBlock[i * 3 + 1];
+		var dataCount  = rsBlock[i * 3 + 2];
+
+		for (var j = 0; j < count; j++) {
+			list.push(new QRRSBlock(totalCount, dataCount) );	
+		}
+	}
+	
+	return list;
+};
+
+QRRSBlock.getRsBlockTable = function(typeNumber, errorCorrectLevel) {
+
+	switch(errorCorrectLevel) {
+	case QRErrorCorrectLevel.L :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 0];
+	case QRErrorCorrectLevel.M :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 1];
+	case QRErrorCorrectLevel.Q :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 2];
+	case QRErrorCorrectLevel.H :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 3];
+	default :
+		return undefined;
+	}
+};
+
+module.exports = QRRSBlock;
+};
+M['QRUtil']=function(module,exports,require){var QRMode = require('./QRMode');
+var QRPolynomial = require('./QRPolynomial');
+var QRMath = require('./QRMath');
+var QRMaskPattern = require('./QRMaskPattern');
+
+var QRUtil = {
+
+    PATTERN_POSITION_TABLE : [
+        [],
+        [6, 18],
+        [6, 22],
+        [6, 26],
+        [6, 30],
+        [6, 34],
+        [6, 22, 38],
+        [6, 24, 42],
+        [6, 26, 46],
+        [6, 28, 50],
+        [6, 30, 54],        
+        [6, 32, 58],
+        [6, 34, 62],
+        [6, 26, 46, 66],
+        [6, 26, 48, 70],
+        [6, 26, 50, 74],
+        [6, 30, 54, 78],
+        [6, 30, 56, 82],
+        [6, 30, 58, 86],
+        [6, 34, 62, 90],
+        [6, 28, 50, 72, 94],
+        [6, 26, 50, 74, 98],
+        [6, 30, 54, 78, 102],
+        [6, 28, 54, 80, 106],
+        [6, 32, 58, 84, 110],
+        [6, 30, 58, 86, 114],
+        [6, 34, 62, 90, 118],
+        [6, 26, 50, 74, 98, 122],
+        [6, 30, 54, 78, 102, 126],
+        [6, 26, 52, 78, 104, 130],
+        [6, 30, 56, 82, 108, 134],
+        [6, 34, 60, 86, 112, 138],
+        [6, 30, 58, 86, 114, 142],
+        [6, 34, 62, 90, 118, 146],
+        [6, 30, 54, 78, 102, 126, 150],
+        [6, 24, 50, 76, 102, 128, 154],
+        [6, 28, 54, 80, 106, 132, 158],
+        [6, 32, 58, 84, 110, 136, 162],
+        [6, 26, 54, 82, 110, 138, 166],
+        [6, 30, 58, 86, 114, 142, 170]
+    ],
+
+    G15 : (1 << 10) | (1 << 8) | (1 << 5) | (1 << 4) | (1 << 2) | (1 << 1) | (1 << 0),
+    G18 : (1 << 12) | (1 << 11) | (1 << 10) | (1 << 9) | (1 << 8) | (1 << 5) | (1 << 2) | (1 << 0),
+    G15_MASK : (1 << 14) | (1 << 12) | (1 << 10)    | (1 << 4) | (1 << 1),
+
+    getBCHTypeInfo : function(data) {
+        var d = data << 10;
+        while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) >= 0) {
+            d ^= (QRUtil.G15 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) ) );    
+        }
+        return ( (data << 10) | d) ^ QRUtil.G15_MASK;
+    },
+
+    getBCHTypeNumber : function(data) {
+        var d = data << 12;
+        while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) >= 0) {
+            d ^= (QRUtil.G18 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) ) );    
+        }
+        return (data << 12) | d;
+    },
+
+    getBCHDigit : function(data) {
+
+        var digit = 0;
+
+        while (data !== 0) {
+            digit++;
+            data >>>= 1;
+        }
+
+        return digit;
+    },
+
+    getPatternPosition : function(typeNumber) {
+        return QRUtil.PATTERN_POSITION_TABLE[typeNumber - 1];
+    },
+
+    getMask : function(maskPattern, i, j) {
+        
+        switch (maskPattern) {
+            
+        case QRMaskPattern.PATTERN000 : return (i + j) % 2 === 0;
+        case QRMaskPattern.PATTERN001 : return i % 2 === 0;
+        case QRMaskPattern.PATTERN010 : return j % 3 === 0;
+        case QRMaskPattern.PATTERN011 : return (i + j) % 3 === 0;
+        case QRMaskPattern.PATTERN100 : return (Math.floor(i / 2) + Math.floor(j / 3) ) % 2 === 0;
+        case QRMaskPattern.PATTERN101 : return (i * j) % 2 + (i * j) % 3 === 0;
+        case QRMaskPattern.PATTERN110 : return ( (i * j) % 2 + (i * j) % 3) % 2 === 0;
+        case QRMaskPattern.PATTERN111 : return ( (i * j) % 3 + (i + j) % 2) % 2 === 0;
+
+        default :
+            throw new Error("bad maskPattern:" + maskPattern);
+        }
+    },
+
+    getErrorCorrectPolynomial : function(errorCorrectLength) {
+
+        var a = new QRPolynomial([1], 0);
+
+        for (var i = 0; i < errorCorrectLength; i++) {
+            a = a.multiply(new QRPolynomial([1, QRMath.gexp(i)], 0) );
+        }
+
+        return a;
+    },
+
+    getLengthInBits : function(mode, type) {
+
+        if (1 <= type && type < 10) {
+
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 10;
+            case QRMode.MODE_ALPHA_NUM  : return 9;
+            case QRMode.MODE_8BIT_BYTE  : return 8;
+            case QRMode.MODE_KANJI      : return 8;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else if (type < 27) {
+
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 12;
+            case QRMode.MODE_ALPHA_NUM  : return 11;
+            case QRMode.MODE_8BIT_BYTE  : return 16;
+            case QRMode.MODE_KANJI      : return 10;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else if (type < 41) {
+
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 14;
+            case QRMode.MODE_ALPHA_NUM  : return 13;
+            case QRMode.MODE_8BIT_BYTE  : return 16;
+            case QRMode.MODE_KANJI      : return 12;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else {
+            throw new Error("type:" + type);
+        }
+    },
+
+    getLostPoint : function(qrCode) {
+        
+        var moduleCount = qrCode.getModuleCount();
+        var lostPoint = 0;
+        var row = 0; 
+        var col = 0;
+
+        
+        for (row = 0; row < moduleCount; row++) {
+
+            for (col = 0; col < moduleCount; col++) {
+
+                var sameCount = 0;
+                var dark = qrCode.isDark(row, col);
+
+                for (var r = -1; r <= 1; r++) {
+
+                    if (row + r < 0 || moduleCount <= row + r) {
+                        continue;
+                    }
+
+                    for (var c = -1; c <= 1; c++) {
+
+                        if (col + c < 0 || moduleCount <= col + c) {
+                            continue;
+                        }
+
+                        if (r === 0 && c === 0) {
+                            continue;
+                        }
+
+                        if (dark === qrCode.isDark(row + r, col + c) ) {
+                            sameCount++;
+                        }
+                    }
+                }
+
+                if (sameCount > 5) {
+                    lostPoint += (3 + sameCount - 5);
+                }
+            }
+        }
+
+
+        for (row = 0; row < moduleCount - 1; row++) {
+            for (col = 0; col < moduleCount - 1; col++) {
+                var count = 0;
+                if (qrCode.isDark(row,     col    ) ) count++;
+                if (qrCode.isDark(row + 1, col    ) ) count++;
+                if (qrCode.isDark(row,     col + 1) ) count++;
+                if (qrCode.isDark(row + 1, col + 1) ) count++;
+                if (count === 0 || count === 4) {
+                    lostPoint += 3;
+                }
+            }
+        }
+
+
+        for (row = 0; row < moduleCount; row++) {
+            for (col = 0; col < moduleCount - 6; col++) {
+                if (qrCode.isDark(row, col) && 
+                        !qrCode.isDark(row, col + 1) && 
+                         qrCode.isDark(row, col + 2) && 
+                         qrCode.isDark(row, col + 3) && 
+                         qrCode.isDark(row, col + 4) && 
+                        !qrCode.isDark(row, col + 5) && 
+                         qrCode.isDark(row, col + 6) ) {
+                    lostPoint += 40;
+                }
+            }
+        }
+
+        for (col = 0; col < moduleCount; col++) {
+            for (row = 0; row < moduleCount - 6; row++) {
+                if (qrCode.isDark(row, col) &&
+                        !qrCode.isDark(row + 1, col) &&
+                         qrCode.isDark(row + 2, col) &&
+                         qrCode.isDark(row + 3, col) &&
+                         qrCode.isDark(row + 4, col) &&
+                        !qrCode.isDark(row + 5, col) &&
+                         qrCode.isDark(row + 6, col) ) {
+                    lostPoint += 40;
+                }
+            }
+        }
+
+        
+        var darkCount = 0;
+
+        for (col = 0; col < moduleCount; col++) {
+            for (row = 0; row < moduleCount; row++) {
+                if (qrCode.isDark(row, col) ) {
+                    darkCount++;
+                }
+            }
+        }
+        
+        var ratio = Math.abs(100 * darkCount / moduleCount / moduleCount - 50) / 5;
+        lostPoint += ratio * 10;
+
+        return lostPoint;       
+    }
+
+};
+
+module.exports = QRUtil;
+};
+M['index']=function(module,exports,require){
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var QR8bitByte = require('./QR8bitByte');
+var QRUtil = require('./QRUtil');
+var QRPolynomial = require('./QRPolynomial');
+var QRRSBlock = require('./QRRSBlock');
+var QRBitBuffer = require('./QRBitBuffer');
+
+function QRCode(typeNumber, errorCorrectLevel) {
+	this.typeNumber = typeNumber;
+	this.errorCorrectLevel = errorCorrectLevel;
+	this.modules = null;
+	this.moduleCount = 0;
+	this.dataCache = null;
+	this.dataList = [];
+}
+
+QRCode.prototype = {
+	
+	addData : function(data) {
+		var newData = new QR8bitByte(data);
+		this.dataList.push(newData);
+		this.dataCache = null;
+	},
+	
+	isDark : function(row, col) {
+		if (row < 0 || this.moduleCount <= row || col < 0 || this.moduleCount <= col) {
+			throw new Error(row + "," + col);
+		}
+		return this.modules[row][col];
+	},
+
+	getModuleCount : function() {
+		return this.moduleCount;
+	},
+	
+	make : function() {
+
+		if (this.typeNumber < 1 ){
+			var typeNumber = 1;
+			for (typeNumber = 1; typeNumber < 40; typeNumber++) {
+				var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, this.errorCorrectLevel);
+
+				var buffer = new QRBitBuffer();
+				var totalDataCount = 0;
+				for (var i = 0; i < rsBlocks.length; i++) {
+					totalDataCount += rsBlocks[i].dataCount;
+				}
+
+				for (var x = 0; x < this.dataList.length; x++) {
+					var data = this.dataList[x];
+					buffer.put(data.mode, 4);
+					buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber) );
+					data.write(buffer);
+				}
+				if (buffer.getLengthInBits() <= totalDataCount * 8)
+					break;
+			}
+			this.typeNumber = typeNumber;
+		}
+		this.makeImpl(false, this.getBestMaskPattern() );
+	},
+	
+	makeImpl : function(test, maskPattern) {
+		
+		this.moduleCount = this.typeNumber * 4 + 17;
+		this.modules = new Array(this.moduleCount);
+		
+		for (var row = 0; row < this.moduleCount; row++) {
+			
+			this.modules[row] = new Array(this.moduleCount);
+			
+			for (var col = 0; col < this.moduleCount; col++) {
+				this.modules[row][col] = null;//(col + row) % 3;
+			}
+		}
+	
+		this.setupPositionProbePattern(0, 0);
+		this.setupPositionProbePattern(this.moduleCount - 7, 0);
+		this.setupPositionProbePattern(0, this.moduleCount - 7);
+		this.setupPositionAdjustPattern();
+		this.setupTimingPattern();
+		this.setupTypeInfo(test, maskPattern);
+		
+		if (this.typeNumber >= 7) {
+			this.setupTypeNumber(test);
+		}
+	
+		if (this.dataCache === null) {
+			this.dataCache = QRCode.createData(this.typeNumber, this.errorCorrectLevel, this.dataList);
+		}
+	
+		this.mapData(this.dataCache, maskPattern);
+	},
+
+	setupPositionProbePattern : function(row, col)  {
+		
+		for (var r = -1; r <= 7; r++) {
+			
+			if (row + r <= -1 || this.moduleCount <= row + r) continue;
+			
+			for (var c = -1; c <= 7; c++) {
+				
+				if (col + c <= -1 || this.moduleCount <= col + c) continue;
+				
+				if ( (0 <= r && r <= 6 && (c === 0 || c === 6) ) || 
+                     (0 <= c && c <= 6 && (r === 0 || r === 6) ) || 
+                     (2 <= r && r <= 4 && 2 <= c && c <= 4) ) {
+					this.modules[row + r][col + c] = true;
+				} else {
+					this.modules[row + r][col + c] = false;
+				}
+			}		
+		}		
+	},
+	
+	getBestMaskPattern : function() {
+	
+		var minLostPoint = 0;
+		var pattern = 0;
+	
+		for (var i = 0; i < 8; i++) {
+			
+			this.makeImpl(true, i);
+	
+			var lostPoint = QRUtil.getLostPoint(this);
+	
+			if (i === 0 || minLostPoint >  lostPoint) {
+				minLostPoint = lostPoint;
+				pattern = i;
+			}
+		}
+	
+		return pattern;
+	},
+	
+	createMovieClip : function(target_mc, instance_name, depth) {
+	
+		var qr_mc = target_mc.createEmptyMovieClip(instance_name, depth);
+		var cs = 1;
+	
+		this.make();
+
+		for (var row = 0; row < this.modules.length; row++) {
+			
+			var y = row * cs;
+			
+			for (var col = 0; col < this.modules[row].length; col++) {
+	
+				var x = col * cs;
+				var dark = this.modules[row][col];
+			
+				if (dark) {
+					qr_mc.beginFill(0, 100);
+					qr_mc.moveTo(x, y);
+					qr_mc.lineTo(x + cs, y);
+					qr_mc.lineTo(x + cs, y + cs);
+					qr_mc.lineTo(x, y + cs);
+					qr_mc.endFill();
+				}
+			}
+		}
+		
+		return qr_mc;
+	},
+
+	setupTimingPattern : function() {
+		
+		for (var r = 8; r < this.moduleCount - 8; r++) {
+			if (this.modules[r][6] !== null) {
+				continue;
+			}
+			this.modules[r][6] = (r % 2 === 0);
+		}
+	
+		for (var c = 8; c < this.moduleCount - 8; c++) {
+			if (this.modules[6][c] !== null) {
+				continue;
+			}
+			this.modules[6][c] = (c % 2 === 0);
+		}
+	},
+	
+	setupPositionAdjustPattern : function() {
+	
+		var pos = QRUtil.getPatternPosition(this.typeNumber);
+		
+		for (var i = 0; i < pos.length; i++) {
+		
+			for (var j = 0; j < pos.length; j++) {
+			
+				var row = pos[i];
+				var col = pos[j];
+				
+				if (this.modules[row][col] !== null) {
+					continue;
+				}
+				
+				for (var r = -2; r <= 2; r++) {
+				
+					for (var c = -2; c <= 2; c++) {
+					
+						if (Math.abs(r) === 2 || 
+                            Math.abs(c) === 2 ||
+                            (r === 0 && c === 0) ) {
+							this.modules[row + r][col + c] = true;
+						} else {
+							this.modules[row + r][col + c] = false;
+						}
+					}
+				}
+			}
+		}
+	},
+	
+	setupTypeNumber : function(test) {
+	
+		var bits = QRUtil.getBCHTypeNumber(this.typeNumber);
+        var mod;
+	
+		for (var i = 0; i < 18; i++) {
+			mod = (!test && ( (bits >> i) & 1) === 1);
+			this.modules[Math.floor(i / 3)][i % 3 + this.moduleCount - 8 - 3] = mod;
+		}
+	
+		for (var x = 0; x < 18; x++) {
+			mod = (!test && ( (bits >> x) & 1) === 1);
+			this.modules[x % 3 + this.moduleCount - 8 - 3][Math.floor(x / 3)] = mod;
+		}
+	},
+	
+	setupTypeInfo : function(test, maskPattern) {
+	
+		var data = (this.errorCorrectLevel << 3) | maskPattern;
+		var bits = QRUtil.getBCHTypeInfo(data);
+        var mod;
+
+		for (var v = 0; v < 15; v++) {
+	
+			mod = (!test && ( (bits >> v) & 1) === 1);
+	
+			if (v < 6) {
+				this.modules[v][8] = mod;
+			} else if (v < 8) {
+				this.modules[v + 1][8] = mod;
+			} else {
+				this.modules[this.moduleCount - 15 + v][8] = mod;
+			}
+		}
+
+		for (var h = 0; h < 15; h++) {
+	
+			mod = (!test && ( (bits >> h) & 1) === 1);
+			
+			if (h < 8) {
+				this.modules[8][this.moduleCount - h - 1] = mod;
+			} else if (h < 9) {
+				this.modules[8][15 - h - 1 + 1] = mod;
+			} else {
+				this.modules[8][15 - h - 1] = mod;
+			}
+		}
+
+		this.modules[this.moduleCount - 8][8] = (!test);
+	
+	},
+	
+	mapData : function(data, maskPattern) {
+		
+		var inc = -1;
+		var row = this.moduleCount - 1;
+		var bitIndex = 7;
+		var byteIndex = 0;
+		
+		for (var col = this.moduleCount - 1; col > 0; col -= 2) {
+	
+			if (col === 6) col--;
+	
+			while (true) {
+	
+				for (var c = 0; c < 2; c++) {
+					
+					if (this.modules[row][col - c] === null) {
+						
+						var dark = false;
+	
+						if (byteIndex < data.length) {
+							dark = ( ( (data[byteIndex] >>> bitIndex) & 1) === 1);
+						}
+	
+						var mask = QRUtil.getMask(maskPattern, row, col - c);
+	
+						if (mask) {
+							dark = !dark;
+						}
+						
+						this.modules[row][col - c] = dark;
+						bitIndex--;
+	
+						if (bitIndex === -1) {
+							byteIndex++;
+							bitIndex = 7;
+						}
+					}
+				}
+								
+				row += inc;
+	
+				if (row < 0 || this.moduleCount <= row) {
+					row -= inc;
+					inc = -inc;
+					break;
+				}
+			}
+		}
+		
+	}
+
+};
+
+QRCode.PAD0 = 0xEC;
+QRCode.PAD1 = 0x11;
+
+QRCode.createData = function(typeNumber, errorCorrectLevel, dataList) {
+	
+	var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectLevel);
+	
+	var buffer = new QRBitBuffer();
+	
+	for (var i = 0; i < dataList.length; i++) {
+		var data = dataList[i];
+		buffer.put(data.mode, 4);
+		buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber) );
+		data.write(buffer);
+	}
+
+	var totalDataCount = 0;
+	for (var x = 0; x < rsBlocks.length; x++) {
+		totalDataCount += rsBlocks[x].dataCount;
+	}
+
+	if (buffer.getLengthInBits() > totalDataCount * 8) {
+		throw new Error("code length overflow. (" + 
+            buffer.getLengthInBits() + 
+            ">" +  
+            totalDataCount * 8 + 
+            ")");
+	}
+
+	if (buffer.getLengthInBits() + 4 <= totalDataCount * 8) {
+		buffer.put(0, 4);
+	}
+
+	while (buffer.getLengthInBits() % 8 !== 0) {
+		buffer.putBit(false);
+	}
+
+	while (true) {
+		
+		if (buffer.getLengthInBits() >= totalDataCount * 8) {
+			break;
+		}
+		buffer.put(QRCode.PAD0, 8);
+		
+		if (buffer.getLengthInBits() >= totalDataCount * 8) {
+			break;
+		}
+		buffer.put(QRCode.PAD1, 8);
+	}
+
+	return QRCode.createBytes(buffer, rsBlocks);
+};
+
+QRCode.createBytes = function(buffer, rsBlocks) {
+
+	var offset = 0;
+	
+	var maxDcCount = 0;
+	var maxEcCount = 0;
+	
+	var dcdata = new Array(rsBlocks.length);
+	var ecdata = new Array(rsBlocks.length);
+	
+	for (var r = 0; r < rsBlocks.length; r++) {
+
+		var dcCount = rsBlocks[r].dataCount;
+		var ecCount = rsBlocks[r].totalCount - dcCount;
+
+		maxDcCount = Math.max(maxDcCount, dcCount);
+		maxEcCount = Math.max(maxEcCount, ecCount);
+		
+		dcdata[r] = new Array(dcCount);
+		
+		for (var i = 0; i < dcdata[r].length; i++) {
+			dcdata[r][i] = 0xff & buffer.buffer[i + offset];
+		}
+		offset += dcCount;
+		
+		var rsPoly = QRUtil.getErrorCorrectPolynomial(ecCount);
+		var rawPoly = new QRPolynomial(dcdata[r], rsPoly.getLength() - 1);
+
+		var modPoly = rawPoly.mod(rsPoly);
+		ecdata[r] = new Array(rsPoly.getLength() - 1);
+		for (var x = 0; x < ecdata[r].length; x++) {
+            var modIndex = x + modPoly.getLength() - ecdata[r].length;
+			ecdata[r][x] = (modIndex >= 0)? modPoly.get(modIndex) : 0;
+		}
+
+	}
+	
+	var totalCodeCount = 0;
+	for (var y = 0; y < rsBlocks.length; y++) {
+		totalCodeCount += rsBlocks[y].totalCount;
+	}
+
+	var data = new Array(totalCodeCount);
+	var index = 0;
+
+	for (var z = 0; z < maxDcCount; z++) {
+		for (var s = 0; s < rsBlocks.length; s++) {
+			if (z < dcdata[s].length) {
+				data[index++] = dcdata[s][z];
+			}
+		}
+	}
+
+	for (var xx = 0; xx < maxEcCount; xx++) {
+		for (var t = 0; t < rsBlocks.length; t++) {
+			if (xx < ecdata[t].length) {
+				data[index++] = ecdata[t][xx];
+			}
+		}
+	}
+
+	return data;
+
+};
+
+module.exports = QRCode;
+};
+return R("index")})();
+</script>
+<script>
+(function(){
+'use strict';
+var D = PANEL;
+function str(v){ return (v===null||v===undefined||v==='<no value>')?'':String(v); }
+function num(v){ v=Number(v); return isFinite(v)?v:0; }
+function esc(s){ return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+function $(id){ return document.getElementById(id); }
+
+/* ---------------------------------------------------------------- страны */
+var C = {
+ NL:['Нидерланды','Netherlands'],DE:['Германия','Germany'],FI:['Финляндия','Finland'],FR:['Франция','France'],SE:['Швеция','Sweden'],
+ PL:['Польша','Poland'],US:['США','United States'],GB:['Великобритания','United Kingdom'],LV:['Латвия','Latvia'],LT:['Литва','Lithuania'],
+ EE:['Эстония','Estonia'],KZ:['Казахстан','Kazakhstan'],TR:['Турция','Turkey'],CH:['Швейцария','Switzerland'],AT:['Австрия','Austria'],
+ CZ:['Чехия','Czechia'],RO:['Румыния','Romania'],BG:['Болгария','Bulgaria'],RS:['Сербия','Serbia'],MD:['Молдова','Moldova'],
+ GE:['Грузия','Georgia'],AM:['Армения','Armenia'],AZ:['Азербайджан','Azerbaijan'],SG:['Сингапур','Singapore'],JP:['Япония','Japan'],
+ CA:['Канада','Canada'],ES:['Испания','Spain'],IT:['Италия','Italy'],NO:['Норвегия','Norway'],DK:['Дания','Denmark'],IE:['Ирландия','Ireland'],
+ BE:['Бельгия','Belgium'],HU:['Венгрия','Hungary'],LU:['Люксембург','Luxembourg'],GR:['Греция','Greece'],RU:['Россия','Russia'],
+ UA:['Украина','Ukraine'],BY:['Беларусь','Belarus'],UZ:['Узбекистан','Uzbekistan'],KG:['Кыргызстан','Kyrgyzstan'],CN:['Китай','China'],
+ HK:['Гонконг','Hong Kong'],IN:['Индия','India'],AE:['ОАЭ','United Arab Emirates'],IL:['Израиль','Israel'],BR:['Бразилия','Brazil'],
+ AU:['Австралия','Australia'],KR:['Южная Корея','South Korea'],TW:['Тайвань','Taiwan'],ZA:['ЮАР','South Africa'],PT:['Португалия','Portugal'],
+ SK:['Словакия','Slovakia'],SI:['Словения','Slovenia'],HR:['Хорватия','Croatia'],CY:['Кипр','Cyprus'],IS:['Исландия','Iceland'],
+ TH:['Таиланд','Thailand'],VN:['Вьетнам','Vietnam'],ID:['Индонезия','Indonesia'],MY:['Малайзия','Malaysia'],MX:['Мексика','Mexico'],
+ AR:['Аргентина','Argentina'],NZ:['Новая Зеландия','New Zealand'],EG:['Египет','Egypt'],CL:['Чили','Chile']
+};
+var NAME2CC = {};
+Object.keys(C).forEach(function(k){ NAME2CC[C[k][1].toLowerCase()]=k; NAME2CC[C[k][0].toLowerCase()]=k; });
+NAME2CC['usa']='US'; NAME2CC['uk']='GB'; NAME2CC['england']='GB'; NAME2CC['turkiye']='TR'; NAME2CC['czech republic']='CZ'; NAME2CC['uae']='AE'; NAME2CC['holland']='NL';
+var NAMES_SORTED = Object.keys(NAME2CC).sort(function(a,b){return b.length-a.length;});
+
+function hs(){ var c=[].slice.call(arguments),h=20/c.length; return c.map(function(x,i){return '<rect y="'+(h*i)+'" width="30" height="'+(h+.05)+'" fill="'+x+'"/>';}).join(''); }
+function vs(){ var c=[].slice.call(arguments),w=30/c.length; return c.map(function(x,i){return '<rect x="'+(w*i)+'" width="'+(w+.05)+'" height="20" fill="'+x+'"/>';}).join(''); }
+function hw(a){ var t=0,y=0; a.forEach(function(p){t+=p[1];}); return a.map(function(p){var h=20*p[1]/t,r='<rect y="'+y+'" width="30" height="'+(h+.05)+'" fill="'+p[0]+'"/>';y+=h;return r;}).join(''); }
+function R(x,y,w,h,f){ return '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="'+f+'"/>'; }
+function star(cx,cy,o,i,f){ var p=[],k; for(k=0;k<10;k++){ var r=k%2?i:o,a=-Math.PI/2+k*Math.PI/5; p.push((cx+r*Math.cos(a)).toFixed(2)+','+(cy+r*Math.sin(a)).toFixed(2)); } return '<polygon points="'+p.join(' ')+'" fill="'+f+'"/>'; }
+function circ(x,y,r,f){ return '<circle cx="'+x+'" cy="'+y+'" r="'+r+'" fill="'+f+'"/>'; }
+function usFlag(){ var s='',i; for(i=0;i<13;i++) s+='<rect y="'+(i*20/13)+'" width="30" height="'+(20/13+.05)+'" fill="'+(i%2?'#fff':'#B22234')+'"/>'; s+=R(0,0,13,10.77,'#3C3B6E'); for(i=0;i<12;i++) s+=circ(1.8+(i%4)*3.2+((Math.floor(i/4)%2)?0:0),1.9+Math.floor(i/4)*3.1,.55,'#fff'); return s; }
+function gbFlag(){ return R(0,0,30,20,'#012169')+'<path d="M0 0L30 20M30 0L0 20" stroke="#fff" stroke-width="4"/><path d="M0 0L30 20M30 0L0 20" stroke="#C8102E" stroke-width="1.4"/>'+R(12,0,6,20,'#fff')+R(0,7,30,6,'#fff')+R(13,0,4,20,'#C8102E')+R(0,8,30,4,'#C8102E'); }
+var FL = {
+ NL:hs('#AE1C28','#fff','#21468B'), DE:hs('#000','#DD0000','#FFCE00'), FR:vs('#0055A4','#fff','#EF4135'), IT:vs('#009246','#fff','#CE2B37'),
+ IE:vs('#169B62','#fff','#FF883E'), BE:vs('#000','#FDDA24','#EF3340'), RO:vs('#002B7F','#FCD116','#CE1126'), MD:vs('#0046AE','#FFD200','#CC092F'),
+ LU:hs('#ED2939','#fff','#00A1DE'), HU:hs('#CE2939','#fff','#477050'), BG:hs('#fff','#00966E','#D62612'), RU:hs('#fff','#0039A6','#D52B1E'),
+ UA:hs('#0057B7','#FFD700'), PL:hs('#fff','#DC143C'), AT:hs('#ED2939','#fff','#ED2939'), ES:hw([['#AA151B',1],['#F1BF00',2],['#AA151B',1]]),
+ LV:hw([['#9E3039',2],['#fff',1],['#9E3039',2]]), LT:hs('#FDB913','#006A44','#C1272D'), EE:hs('#0072CE','#000','#fff'), AM:hs('#D90012','#0033A0','#F2A800'),
+ RS:hs('#C6363C','#0C4076','#fff'), AZ:hs('#00B5E2','#EF3340','#509E2F'), BY:hs('#CF101A','#CF101A','#4AA657'),
+ NO:R(0,0,30,20,'#BA0C2F')+R(8,0,5,20,'#fff')+R(0,7.5,30,5,'#fff')+R(9.1,0,2.8,20,'#00205B')+R(0,8.6,30,2.8,'#00205B'),
+ DK:R(0,0,30,20,'#C60C30')+R(9,0,3,20,'#fff')+R(0,8.5,30,3,'#fff'),
+ SE:R(0,0,30,20,'#006AA7')+R(9,0,4,20,'#FECC00')+R(0,8,30,4,'#FECC00'),
+ FI:R(0,0,30,20,'#fff')+R(8,0,5,20,'#003580')+R(0,7.5,30,5,'#003580'),
+ CH:R(0,0,30,20,'#DA291C')+R(12.5,4,5,12,'#fff')+R(9,7.5,12,5,'#fff'),
+ CZ:hs('#fff','#D7141A')+'<polygon points="0,0 15,10 0,20" fill="#11457E"/>',
+ GB:gbFlag(), US:usFlag(),
+ JP:R(0,0,30,20,'#fff')+circ(15,10,6,'#BC002D'),
+ SG:hs('#ED2939','#fff')+circ(6,5,3.7,'#fff')+circ(7.3,5,3.1,'#ED2939')+star(10.2,3.6,.9,.38,'#fff')+star(11.8,5.2,.9,.38,'#fff')+star(10.9,7.2,.9,.38,'#fff')+star(8.8,7.2,.9,.38,'#fff')+star(8.3,5,.9,.38,'#fff'),
+ TR:R(0,0,30,20,'#E30A17')+circ(11.2,10,5,'#fff')+circ(12.6,10,4,'#E30A17')+star(17.6,10,2.3,.95,'#fff'),
+ KZ:R(0,0,30,20,'#00AFCA')+circ(15,8.6,3.6,'#FEC50C')+'<path d="M8 15.2h14" stroke="#FEC50C" stroke-width="1.2"/>',
+ GE:R(0,0,30,20,'#fff')+R(13,0,4,20,'#F00')+R(0,8,30,4,'#F00')+[[6.5,3.5],[23.5,3.5],[6.5,16.5],[23.5,16.5]].map(function(p){return R(p[0]-.7,p[1]-2,1.4,4,'#F00')+R(p[0]-2,p[1]-.7,4,1.4,'#F00');}).join(''),
+ CA:R(0,0,7.5,20,'#D52B1E')+R(7.5,0,15,20,'#fff')+R(22.5,0,7.5,20,'#D52B1E')+'<path fill="#D52B1E" d="M15 3.8l1.4 2.9 1.9-.7-.7 3.8 1.6-1.3.5 1.4 2.4-.4-1 2.4.9.8-3.5 2.8.3 1.5-3-.5v3.4h-1.7v-3.4l-3 .5.3-1.5-3.5-2.8.9-.8-1-2.4 2.4.4.5-1.4 1.6 1.3-.7-3.8 1.9.7z"/>',
+ GR:hs('#0D5EAF','#fff','#0D5EAF','#fff','#0D5EAF','#fff','#0D5EAF','#fff','#0D5EAF')+R(0,0,11,11,'#0D5EAF')+R(4.5,0,2.2,11,'#fff')+R(0,4.4,11,2.2,'#fff')
+};
+function flag(cc){
+  if(cc && FL[cc]) return '<svg class="flag" viewBox="0 0 30 20" role="img" aria-label="'+cc+'"><title>'+esc((C[cc]||[cc])[0])+'</title>'+FL[cc]+'</svg>';
+  if(cc && /^[A-Z]{2}$/.test(cc)) return '<span class="flag-e" title="'+esc((C[cc]||[cc,cc])[0])+'">'+String.fromCodePoint(0x1F1E6+cc.charCodeAt(0)-65,0x1F1E6+cc.charCodeAt(1)-65)+'</span>';
+  return '<span class="flag-e">🌐</span>';
+}
+function ccFromEmoji(s){
+  var m=s.match(/^\s*([\uD83C][\uDDE6-\uDDFF])([\uD83C][\uDDE6-\uDDFF])/);
+  if(!m) return '';
+  return String.fromCharCode(m[1].charCodeAt(1)-0xDDE6+65, m[2].charCodeAt(1)-0xDDE6+65);
+}
+
+/* --------------------------------------------------------------- протоколы */
+var P = {
+  vless:['VLESS','#8b5cf6',0], vmess:['VMess','#3b82f6',1], trojan:['Trojan','#f43f5e',2], ss:['Shadowsocks','#14b8a6',3],
+  hysteria2:['Hysteria2','#f59e0b',4], hysteria:['Hysteria','#f59e0b',5], tuic:['TUIC','#ec4899',6], wg:['WireGuard','#22c55e',7],
+  awg:['AmneziaWG','#22c55e',7], mtproto:['MTProto','#38bdf8',8], other:['Другое','#94a3b8',9]
+};
+var SECRANK={reality:0,tls:1,none:2,'':3};
+function b64d(s){
+  s=s.replace(/-/g,'+').replace(/_/g,'/'); while(s.length%4) s+='=';
+  var bin=atob(s); try{ return decodeURIComponent(escape(bin)); }catch(e){ return bin; }
+}
+function dec(s){ try{ return decodeURIComponent(s); }catch(e){ return s; } }
+function parse(raw,idx){
+  raw=str(raw).trim();
+  var o={raw:raw,idx:idx,pk:'other',host:'',port:'',remark:'',sec:'',net:'',p:{}};
+  var m=raw.match(/^([a-z0-9+.\-]+):\/\/(?:([^@\/?#]*)@)?(\[[^\]]+\]|[^:\/?#]*)(?::(\d+))?([^?#]*)(?:\?([^#]*))?(?:#(.*))?$/i);
+  if(!m){ o.remark=(raw.split(/\r?\n/)[0]||'Конфигурация').slice(0,60); o.host='—'; return o; }
+  var sch=m[1].toLowerCase(), q=m[6]||'';
+  q.split('&').forEach(function(kv){ if(!kv) return; var i=kv.indexOf('='); var k=i<0?kv:kv.slice(0,i); o.p[k]=dec(i<0?'':kv.slice(i+1).replace(/\+/g,' ')); });
+  o.host=m[3].replace(/^\[|\]$/g,''); o.port=m[4]||''; o.remark=dec(m[7]||'');
+  if(sch==='vmess'){
+    o.pk='vmess';
+    try{ var j=JSON.parse(b64d(raw.slice(8).split('#')[0])); o.host=str(j.add); o.port=str(j.port); o.remark=str(j.ps)||o.remark;
+      o.net=str(j.net); o.sec=(j.tls&&j.tls!=='none')?'tls':'none'; o.p.sni=str(j.sni||j.host); o.p.path=str(j.path); }catch(e){}
+  } else if(sch==='vless'){ o.pk='vless'; }
+  else if(sch==='trojan'){ o.pk='trojan'; }
+  else if(sch==='ss'){ o.pk='ss';
+    if(!o.port){ try{ var d=b64d(m[3]+(m[2]?'':'')); var mm=d.match(/@(.+):(\d+)$/); if(mm){o.host=mm[1];o.port=mm[2];} }catch(e){} } }
+  else if(sch==='hysteria2'||sch==='hy2'){ o.pk='hysteria2'; o.net='udp'; }
+  else if(sch==='hysteria'){ o.pk='hysteria'; o.net='udp'; }
+  else if(sch==='tuic'){ o.pk='tuic'; o.net='udp'; }
+  else if(sch==='wireguard'||sch==='wg'){ o.pk='wg'; o.net='udp'; }
+  else if(sch==='awg'||sch==='amneziawg'){ o.pk='awg'; o.net='udp'; }
+  else if(sch==='tg'||(sch==='https'&&/t\.me$/.test(m[3])&&/^\/proxy/.test(m[5]))){
+    o.pk='mtproto'; o.host=str(o.p.server)||o.host; o.port=str(o.p.port)||o.port; o.net='tcp'; o.sec='faketls'; }
+  else { o.pk='other'; }
+  if(!o.sec){ o.sec=str(o.p.security); if(!o.sec) o.sec=(o.pk==='trojan'||o.pk==='hysteria2'||o.pk==='hysteria'||o.pk==='tuic')?'tls':'none'; }
+  if(!o.net) o.net=str(o.p.type)||(o.pk==='wg'||o.pk==='awg'?'udp':'tcp');
+  if(/amnezia/i.test(o.remark)&&o.pk==='wg') o.pk='awg';
+  o.proto=P[o.pk][0]; o.pc=P[o.pk][1];
+  /* страна и «чистое» имя */
+  var name=o.remark, cc=ccFromEmoji(name);
+  name=name.replace(/^\s*[\uD83C][\uDDE6-\uDDFF][\uD83C][\uDDE6-\uDDFF]\s*/,'').trim();
+  var low=name.toLowerCase(), i2;
+  for(i2=0;i2<NAMES_SORTED.length;i2++){ var nm=NAMES_SORTED[i2]; if(low===nm||low.indexOf(nm+' ')===0||low.indexOf(nm+'-')===0){ if(!cc) cc=NAME2CC[nm]; name=name.slice(nm.length).replace(/^[\s\-–—|·:]+/,''); break; } }
+  (D.emails||[]).forEach(function(em){ em=str(em); if(!em) return;
+    if(name.slice(-em.length-1)==='-'+em) name=name.slice(0,-em.length-1);
+    else if(name.slice(0,em.length+1)===em+'-') name=name.slice(em.length+1); });
+  o.cc=cc; o.name=name.trim()||o.proto;
+  return o;
+}
+
+var items=[];
+function loadItems(){
+  var links=Array.isArray(D.links)?D.links:[];
+  items=links.map(function(l,i){return parse(l,i);}).filter(function(x){return x.raw;});
+  var hostCC={};
+  items.forEach(function(it){ if(it.cc&&!hostCC[it.host]) hostCC[it.host]=it.cc; });
+  items.forEach(function(it){ if(!it.cc) it.cc=hostCC[it.host]||''; });
+}
+
+/* ------------------------------------------------------------------- вспомогательное */
+function fmtBytes(n){
+  if(!n||n<=0) return '0 B'; var u=['B','KB','MB','GB','TB','PB'],i=Math.min(5,Math.floor(Math.log(n)/Math.log(1024)));
+  var v=n/Math.pow(1024,i); return (v>=100||i===0?v.toFixed(0):v>=10?v.toFixed(1):v.toFixed(2))+' '+u[i];
+}
+function ic(p){ return '<svg viewBox="0 0 24 24">'+p+'</svg>'; }
+var I={copy:'<rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 012-2h9"/>',
+  qr:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M21 14v.01M14 21h3M21 17v4"/>',
+  down:'<path d="M12 4v12M7 11l5 5 5-5"/>', up:'<path d="M12 20V8M7 13l5-5 5 5"/>', left:'<path d="M12 7v5l3 2"/><circle cx="12" cy="12" r="9"/>', cal:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/>',
+  chev:'<path d="M6 9l6 6 6-6"/>', pie:'<path d="M21 12a9 9 0 11-9-9v9z"/><path d="M15 3.5A9 9 0 0120.5 9H15z"/>', warn:'<path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/>'};
+
+var toastT;
+function toast(t){ $('tt').textContent=t; var e=$('toast'); e.classList.add('on'); clearTimeout(toastT); toastT=setTimeout(function(){e.classList.remove('on');},1600); }
+function copy(text,btn){ if(btn&&!btn.dataset.lbl) btn.dataset.lbl='1';
+  function done(){ toast('Скопировано'); if(btn){ btn.classList.add('ok'); setTimeout(function(){btn.classList.remove('ok');},1100); } }
+  if(navigator.clipboard&&window.isSecureContext){ navigator.clipboard.writeText(text).then(done,fallback); } else fallback();
+  function fallback(){ var t=document.createElement('textarea'); t.value=text; t.style.cssText='position:fixed;opacity:0'; document.body.appendChild(t); t.select();
+    try{ document.execCommand('copy'); done(); }catch(e){ toast('Не удалось скопировать'); } document.body.removeChild(t); }
+}
+
+function dateFmt(ms){
+  var loc=D.datepicker==='jalali'?'fa-IR-u-ca-persian':'ru-RU';
+  try{ return new Date(ms).toLocaleDateString(loc,{day:'2-digit',month:'2-digit',year:'numeric'}); }catch(e){ return new Date(ms).toLocaleDateString(); }
+}
+function pad2(n){ return (n<10?'0':'')+n; }
+function cdText(ms){ if(ms<=0) return 'Срок истёк'; var t=Math.floor(ms/1000),d=Math.floor(t/86400),h=Math.floor(t%86400/3600),m=Math.floor(t%3600/60),x=t%60;
+  return 'Осталось '+(d?d+' д ':'')+pad2(h)+':'+pad2(m)+':'+pad2(x); }
+function cu(root){
+  if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  [].forEach.call(root.querySelectorAll('[data-cu]'),function(el){
+    var to=parseFloat(el.dataset.cu), dec=+el.dataset.dec||0, suf=el.dataset.suf||'', t0=performance.now(), dur=1200;
+    (function f(t){ var k=Math.min(1,(t-t0)/dur), e=1-Math.pow(1-k,4); el.textContent=(to*e).toFixed(dec)+suf; if(k<1) requestAnimationFrame(f); })(t0);
+  });
+}
+function numAttr(v){ var m=String(v).match(/^(\d+(?:\.\d+)?)(\s*[A-Za-z]+)$/); return m?' data-cu="'+m[1]+'" data-dec="'+((m[1].split('.')[1]||'').length)+'" data-suf="'+esc(m[2])+'"':''; }
+function emailsHtml(){
+  var e=(Array.isArray(D.emails)?D.emails:[]).map(str).filter(Boolean).filter(function(v,i,a){return a.indexOf(v)===i;});
+  return e.length?'<div class="emails">'+e.map(function(x){return '<span>'+esc(x)+'</span>';}).join('')+'</div>':'';
+}
+function plural(n,f){ n=Math.abs(n)%100; var d=n%10; return (n>10&&n<20)?f[2]:d>1&&d<5?f[1]:d===1?f[0]:f[2]; }
+function ago(ms){ var m=Math.floor(ms/6e4); if(m<1) return 'только что'; if(m<60) return m+' мин. назад'; var h=Math.floor(m/60); if(h<24) return h+' ч. назад'; var d=Math.floor(h/24); return d+' '+plural(d,['день','дня','дней'])+' назад'; }
+
+var S={g:'node',q:'',pf:'all',tf:'all',closed:{},open:{}};
+function netKey(it){ var n=it.net||''; return n==='splithttp'?'xhttp':n; }
+var NETRANK={tcp:0,xhttp:1,ws:2,grpc:3,httpupgrade:4,h2:5,http:6,kcp:7,udp:8,quic:9};
+function visible(){
+  var q=S.q.trim().toLowerCase();
+  return items.filter(function(it){
+    if(S.pf!=='all'&&it.pk!==S.pf) return false;
+    if(S.tf!=='all'&&netKey(it)!==S.tf) return false;
+    if(!q) return true;
+    var hay=[it.name,it.remark,it.host,it.port,it.proto,it.sec,it.net,(C[it.cc]||[])[0],(C[it.cc]||[])[1],it.cc].join(' ').toLowerCase();
+    return q.split(/\s+/).every(function(w){return hay.indexOf(w)>=0;});
+  });
+}
+function cmpItem(a,b){
+  return (P[a.pk][2]-P[b.pk][2])||((SECRANK[a.sec]!==undefined?SECRANK[a.sec]:3)-(SECRANK[b.sec]!==undefined?SECRANK[b.sec]:3))||(num(a.port)-num(b.port))||(a.idx-b.idx);
+}
+function ccName(cc){ return cc&&C[cc]?C[cc][0]:'Без страны'; }
+function groups(list){
+  if(S.g==='list') return [{key:'all',items:list.slice()}];
+  var map={},arr=[];
+  list.forEach(function(it){
+    var k=S.g==='node'?it.host:S.g==='country'?(it.cc||'?'):it.pk;
+    if(!map[k]){ map[k]={key:k,items:[],cc:it.cc,host:it.host,pk:it.pk}; arr.push(map[k]); }
+    map[k].items.push(it);
+  });
+  arr.forEach(function(g){ g.items.sort(cmpItem); });
+  arr.sort(function(a,b){
+    if(S.g==='proto') return P[a.pk][2]-P[b.pk][2];
+    var an=a.cc?0:1,bn=b.cc?0:1; if(an!==bn) return an-bn;
+    return ccName(a.cc).localeCompare(ccName(b.cc),'ru')||String(a.host||'').localeCompare(String(b.host||''));
+  });
+  return arr;
+}
+function secLabel(s){ return {reality:'Reality',tls:'TLS',none:'Без TLS',faketls:'FakeTLS'}[s]||(s||'—'); }
+function netLabel(n){ return {tcp:'TCP',udp:'UDP',ws:'WebSocket',grpc:'gRPC',xhttp:'XHTTP',splithttp:'XHTTP',httpupgrade:'HTTPUpgrade',h2:'HTTP/2',http:'HTTP',kcp:'mKCP',quic:'QUIC'}[n]||(n?n.toUpperCase():''); }
+var EXPMS=0, LOMS=0, URLROWS=[], APPS=[], SUBTAB=0;
+function cdShort(ms){ var t=Math.floor(ms/1000),d=Math.floor(t/86400),h=Math.floor(t%86400/3600),m=Math.floor(t%3600/60),s=t%60;
+  return (d?d+'д ':'')+pad2(h)+':'+pad2(m)+':'+pad2(s); }
+function flagC(cc){ return flag(cc).replace('<svg class="flag"','<svg class="flag" preserveAspectRatio="xMidYMid slice"'); }
+function uniqEmails(){ return (Array.isArray(D.emails)?D.emails:[]).map(str).filter(Boolean).filter(function(v,i,a){return a.indexOf(v)===i;}); }
+function calc(){
+  var dl=num(D.downloadByte), ul=num(D.uploadByte), tot=num(D.totalByte), used=dl+ul;
+  var exp=num(D.expire); if(exp>1e11) exp=Math.floor(exp/1000);
+  var now=Date.now(), lo=num(D.lastOnline), r={dl:dl,ul:ul,tot:tot,used:used,exp:exp,now:now,lo:lo};
+  r.pct=tot>0?Math.min(100,used/tot*100):0; r.expMs=exp>0?exp*1000:0;
+  r.online=D.isOnline===true||(lo>0&&now-lo<60000);
+  r.depleted=tot>0&&used>=tot; r.expired=exp>0&&r.expMs<now; r.enabled=D.enabled!==false;
+  r.state='ok'; r.label='Активна';
+  if(!r.enabled){ r.state='bad'; r.label='Отключена'; } else if(r.depleted){ r.state='bad'; r.label='Трафик исчерпан'; } else if(r.expired){ r.state='bad'; r.label='Срок истёк'; }
+  else if(r.expMs&&r.expMs-now<3*864e5){ r.state='warn'; }
+  r.dTxt=str(D.download)||fmtBytes(dl); r.uTxt=str(D.upload)||fmtBytes(ul); r.tTxt=tot>0?(str(D.total)||fmtBytes(tot)):'';
+  r.usedTxt=str(D.used)||fmtBytes(used);
+  var m=r.usedTxt.match(/^(\d+(?:[.,]\d+)?)\s*([A-Za-z]+)$/); r.n1=m?m[1].replace(',','.'):r.usedTxt; r.unit=m?m[2]:'';
+  r.rem=tot>0?(str(D.remained)||fmtBytes(Math.max(0,tot-used))):'∞';
+  r.lastTxt=r.online?'сейчас онлайн':(lo>0?'был(а) '+ago(now-lo):'ещё не подключались');
+  r.expTxt=r.expMs?dateFmt(r.expMs):(exp<0?'с первого входа':'бессрочно');
+  EXPMS=r.expMs; LOMS=lo;
+  return r;
+}
+function tickAll(){
+  var n=Date.now();
+  if(EXPMS&&EXPMS>n) [].forEach.call(document.querySelectorAll('.cdv'),function(e){ e.textContent=cdShort(EXPMS-n); });
+  if(LOMS>0&&!(D.isOnline===true||n-LOMS<60000)) [].forEach.call(document.querySelectorAll('.lov'),function(e){ e.textContent='был(а) '+ago(n-LOMS); });
+}
+setInterval(function(){ tickAll(); if(window.onTick) window.onTick(); },1000);
+function makeQR(text){
+  var bin=unescape(encodeURIComponent(text)), t, q;
+  for(t=1;t<=40;t++){ try{ q=new __qr(t,1); q.addData(bin); q.make(); return q; }catch(e){} }
+  return null;
+}
+function drawQR(cv,text,fg){
+  var q=makeQR(text), ctx=cv.getContext('2d'), size=520; cv.width=size; cv.height=size;
+  ctx.fillStyle='#fff'; ctx.fillRect(0,0,size,size);
+  if(!q){ ctx.fillStyle='#111'; ctx.font='20px sans-serif'; ctx.fillText('Слишком длинная ссылка для QR',30,260); return; }
+  var n=q.getModuleCount(), cell=Math.floor(size/(n+2)), off=Math.floor((size-cell*n)/2), r, c;
+  ctx.fillStyle=fg||'#111'; for(r=0;r<n;r++) for(c=0;c<n;c++) if(q.isDark(r,c)) ctx.fillRect(off+c*cell,off+r*cell,cell,cell);
+}
+var AI={
+  happ:['#8b5cf6','#5b4be0','<path d="M7.5 5.5v13M16.5 5.5v13M7.5 12h9" stroke-width="2.8"/>'],
+  incy:['#34d399','#059669','<circle cx="12" cy="12" r="8.2"/><path d="M12 11.2v5"/><circle cx="12" cy="7.9" r=".7" fill="#fff"/>'],
+  hiddify:['#60a5fa','#2563eb','<path d="M12 3l7.8 4.5v9L12 21l-7.8-4.5v-9z"/><circle cx="12" cy="12" r="2.5" fill="#fff" stroke="none"/>'],
+  v2rayng:['#38bdf8','#0284c7','<path d="M5 6.5l7 12.5 7-12.5"/><path d="M12 3v3.2"/>'],
+  streisand:['#fb923c','#ea580c','<path d="M12 3c.8 4.6 2.4 7.2 9 9-6.6 1.8-8.2 4.4-9 9-.8-4.6-2.4-7.2-9-9 6.6-1.8 8.2-4.4 9-9z" fill="#fff" stroke="none"/>'],
+  v2box:['#2dd4bf','#0d9488','<path d="M12 3l8 4.2v9.6L12 21l-8-4.2V7.2z"/><path d="M4 7.2l8 4.3 8-4.3M12 11.5V21"/>'],
+  clash:['#f472b6','#db2777','<path d="M13.5 3L6 13.5h5L10 21l8-11h-5.2z" fill="#fff" stroke="none"/>'],
+  singbox:['#94a3b8','#475569','<path d="M3.5 12H6l2-5.5 3 11 3-8 1.8 2.5h3.2"/>']
+};
+function appIcon(key,cls){ var k=AI[key]; return '<span class="ai'+(cls?' '+cls:'')+'" style="background:linear-gradient(135deg,'+k[0]+','+k[1]+')"><svg viewBox="0 0 24 24">'+k[2]+'</svg></span>'; }
+function buildSub(){
+  URLROWS=[['Универсальная','sub',str(D.subUrl)],['JSON','json',str(D.subJsonUrl)],['Clash','clash',str(D.subClashUrl)]].filter(function(r){return r[2];});
+  var u=str(D.subUrl); APPS=[];
+  if(u){ var e=encodeURIComponent(u), c=encodeURIComponent(str(D.subClashUrl)||u), t=encodeURIComponent(str(D.subTitle)||'Подписка');
+    APPS=[['Happ','happ','happ://add/'+u],['INCY','incy','incy://import/'+u],['Hiddify','hiddify','hiddify://import/'+u+'#'+t],['v2rayNG','v2rayng','v2rayng://install-sub?url='+e+'&name='+t],
+      ['Streisand','streisand','streisand://import/'+u],['V2Box','v2box','v2box://install-sub?url='+e+'&name='+t],['Clash','clash','clash://install-config?url='+c],['sing-box','singbox','sing-box://import-remote-profile?url='+e+'#'+t]]; }
+}
+var qrText='', QRCOL='#111';
+function openQR(text,title,color){
+  qrText=text; $('mt').innerHTML='<span class="pdot2" style="background:'+(color||'#888')+'"></span>'+esc(title); $('ml').textContent=text.length>120?text.slice(0,117)+'…':text;
+  drawQR($('qr'),text,QRCOL); $('ov').classList.add('on');
+}
+function closeQR(){ $('ov').classList.remove('on'); }
+function bindQR(){
+  $('mclose').onclick=closeQR; $('ov').onclick=function(e){ if(e.target===this) closeQR(); };
+  $('mcopy').onclick=function(){ copy(qrText,this); };
+  $('mdl').onclick=function(){ var a=document.createElement('a'); a.download='qr.png'; a.href=$('qr').toDataURL('image/png'); document.body.appendChild(a); a.click(); document.body.removeChild(a); };
+}
+function headCommon(){
+  var t=str(D.subTitle)||'Подписка'; if($('title')) $('title').textContent=t; document.title=t;
+  var id=str(D.sId); if($('subid')) $('subid').textContent=id?'ID '+(id.length>20?id.slice(0,8)+'…'+id.slice(-4):id):'';
+  var su=str(D.subSupportUrl); if($('support')&&su&&/^(https?:|tg:|mailto:)/i.test(su)){ var a=$('support'); a.href=su; a.hidden=false; }
+  var an=str(D.announce).trim(); if($('announce')&&an) $('announce').innerHTML='<div class="announce">'+esc(an).replace(/\n/g,'<br>')+'</div>';
+}
+function copyAllOf(list,btn){ if(list.length) copy(list.map(function(x){return x.raw;}).join('\n'),btn); }
+function detailKV(it){ return [['Адрес',it.host],['Порт',it.port],['Протокол',it.proto],['Безопасность',secLabel(it.sec)],['Транспорт',netLabel(it.net)],['SNI',it.p.sni||it.p.host],['Flow',it.p.flow],
+  ['Fingerprint',it.p.fp],['Путь',it.p.path],['Режим',it.p.mode],['ServiceName',it.p.serviceName],['Obfs',it.p.obfs],['ALPN',it.p.alpn]].filter(function(x){return str(x[1]);}); }
+function chipsData(){
+  var pc={}, nc={}, np=0, nn=0, allP={}, allN={};
+  items.forEach(function(it){
+    allP[it.pk]=1; allN[netKey(it)||'other']=1;
+    if(S.tf==='all'||netKey(it)===S.tf){ pc[it.pk]=(pc[it.pk]||0)+1; np++; }
+    if(S.pf==='all'||it.pk===S.pf){ var k=netKey(it)||'other'; nc[k]=(nc[k]||0)+1; nn++; }
+  });
+  var pk=Object.keys(allP).sort(function(a,b){return P[a][2]-P[b][2];});
+  var nk=Object.keys(allN).sort(function(a,b){return (NETRANK[a]===undefined?99:NETRANK[a])-(NETRANK[b]===undefined?99:NETRANK[b]);});
+  if(S.tf!=='all'&&!allN[S.tf]) S.tf='all';
+  return {pc:pc,nc:nc,np:np,nn:nn,pk:pk,nk:nk};
+}
+function chipsHtml(cls){
+  var d=chipsData(), h='';
+  if(d.pk.length>1){
+    h+='<div class="crow"><span class="cl">Протокол</span><div class="cw"><button class="fchip'+(S.pf==='all'?' on':'')+'" data-pf="all">Все <em>'+d.np+'</em></button>';
+    d.pk.forEach(function(k){ h+='<button class="fchip'+(S.pf===k?' on':'')+(d.pc[k]?'':' dim')+'" data-pf="'+k+'"><i style="background:'+P[k][1]+'"></i>'+P[k][0]+' <em>'+(d.pc[k]||0)+'</em></button>'; });
+    h+='</div></div>';
+  }
+  if(d.nk.length>1){
+    h+='<div class="crow"><span class="cl">Транспорт</span><div class="cw"><button class="fchip'+(S.tf==='all'?' on':'')+'" data-tf="all">Все <em>'+d.nn+'</em></button>';
+    d.nk.forEach(function(k){ h+='<button class="fchip'+(S.tf===k?' on':'')+(d.nc[k]?'':' dim')+'" data-tf="'+k+'">'+esc(k==='other'?'Другое':netLabel(k))+' <em>'+(d.nc[k]||0)+'</em></button>'; });
+    h+='</div></div>';
+  }
+  return h;
+}
+function chipClick(e,after){ var b=e.target.closest('button'); if(!b) return; if(b.dataset.pf!==undefined) S.pf=b.dataset.pf; if(b.dataset.tf!==undefined) S.tf=b.dataset.tf; after(); }
+function svg(p){ return '<svg viewBox="0 0 24 24">'+p+'</svg>'; }
+var IC={copy:'<rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 012-2h9"/>',qr:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M21 14v.01M14 21h3M21 17v4"/>',chev:'<path d="M6 9l6 6 6-6"/>'};
+var PLAYI='<svg viewBox="0 0 24 24"><path d="M6 3l15 9-15 9z"/></svg>', ALLI='<svg viewBox="0 0 24 24"><path d="M4 6h12M4 12h12M4 18h8M19 8v9a2 2 0 11-2-2h2"/></svg>';
+var PL=null;
+function hueOf(s){ var h=0,i; s=String(s); for(i=0;i<s.length;i++) h=(h*31+s.charCodeAt(i))>>>0; return h%360; }
+function hosts(){ var m={},o=[]; items.forEach(function(it){ if(!m[it.host]){ m[it.host]={host:it.host,cc:it.cc,n:0}; o.push(m[it.host]); } m[it.host].n++; }); return o; }
+function nodeCount(){ return hosts().length; }
+function curHue(){ return PL?hueOf(PL):hueOf(str(D.sId)||'x'); }
+function renderPls(){
+  var hs=hosts(), h='<button class="pl'+(PL===null?' on':'')+'" data-pl="" style="--h:'+hueOf(str(D.sId)||'x')+'"><span class="cov all">'+ALLI+'</span><span class="t"><b>Все треки</b><small>'+items.length+' · '+hs.length+' '+plural(hs.length,['узел','узла','узлов'])+'</small></span></button>';
+  hs.forEach(function(x){ h+='<button class="pl'+(PL===x.host?' on':'')+'" data-pl="'+esc(x.host)+'" style="--h:'+hueOf(x.host)+'"><span class="cov">'+flagC(x.cc)+'</span><span class="t"><b>'+esc(ccName(x.cc)||x.host)+'</b><small>'+esc(x.host)+' · '+x.n+'</small></span></button>'; });
+  $('pls').innerHTML=h; document.documentElement.style.setProperty('--hue',curHue());
+}
+function renderHero(){ renderTop(false); renderNP(); }
+function renderTop(first){
+  var r=calc(), em=uniqEmails(), who=em[0]||'—', id=str(D.sId).replace(/-/g,'').slice(0,8).toUpperCase()||'—';
+  var cdw=r.expMs&&r.expMs>r.now?'<b class="mono cdv">'+cdShort(r.expMs-r.now)+'</b>':'<b>'+(r.expMs?'истёк':'∞')+'</b>';
+  var h=curHue(), fmts=URLROWS.length>1?'<div class="fm" id="fmts">'+URLROWS.map(function(x,k){return '<button data-t="'+k+'" class="'+(k===SUBTAB?'on':'')+'">'+x[0]+'</button>';}).join('')+'</div>':'';
+  $('hero').innerHTML=
+   '<div class="hero" style="--h:'+h+'"><div class="bigcov">'+PLAYI+'</div><div class="tx"><div class="kick">Подписка · '+esc(r.label)+'</div><h1>'+esc(str(D.subTitle)||who)+'</h1>'+
+   '<div class="meta"><b>'+esc(who)+'</b><span class="d">•</span><span>'+items.length+' '+plural(items.length,['трек','трека','треков'])+'</span><span class="d">•</span><span>'+nodeCount()+' '+plural(nodeCount(),['плейлист','плейлиста','плейлистов'])+'</span><span class="d">•</span><span>до '+esc(r.expTxt)+'</span></div></div></div>'+
+   '<div class="ctl"><button class="play" id="ucopy" title="Скопировать подписку" aria-label="Скопировать подписку">'+PLAYI+'</button>'+fmts+'<button class="pill" id="uqr">Показать QR</button></div>'+
+   '<div class="stats"><div class="st"><small>Использовано</small><b>'+esc(r.usedTxt)+'</b></div><div class="st"><small>Лимит</small><b>'+esc(r.tot>0?r.tTxt:'без лимита')+'</b></div><div class="st"><small>↓ / ↑</small><b>'+esc(r.dTxt)+' / '+esc(r.uTxt)+'</b></div><div class="st"><small>Последний вход</small><b class="lov" style="font-size:18px">'+esc(r.lastTxt)+'</b></div></div>';
+  var f=$('fmts'); if(f) f.onclick=function(e){ var b=e.target.closest('button'); if(!b) return; SUBTAB=+b.dataset.t; [].forEach.call(f.children,function(x,k){x.classList.toggle('on',k===SUBTAB);}); };
+  $('ucopy').onclick=function(){ if(URLROWS.length) copy(URLROWS[SUBTAB][2],this); else toast('Адрес подписки недоступен'); };
+  $('uqr').onclick=function(){ if(URLROWS.length) openQR(URLROWS[SUBTAB][2],'QR · '+URLROWS[SUBTAB][0],'#1ed760'); };
+  tickAll();
+}
+var npFirst=true;
+function renderNP(){
+  var r=calc(), pct=r.tot>0?Math.min(100,r.pct):100, cls=r.tot>0?(r.pct>=90?'bad':r.pct>=70?'warn':''):'';
+  var cur=PL?ccName((hosts().filter(function(x){return x.host===PL;})[0]||{}).cc)||PL:'Все узлы';
+  var left=r.expMs&&r.expMs>r.now?'-'+cdShort(r.expMs-r.now):(r.expMs?'истёк':'∞');
+  var w=npFirst?0:pct.toFixed(1);
+  $('np').style.setProperty('--h',curHue());
+  $('np').innerHTML='<div class="l"><div class="cov" style="--h:'+curHue()+'">'+(PL?flagC((hosts().filter(function(x){return x.host===PL;})[0]||{}).cc):'<span class="cov all">'+PLAYI+'</span>')+'</div><div style="min-width:0"><b>'+esc(str(D.subTitle)||'Подписка')+'</b><small>'+esc(cur)+' · '+esc(r.label)+'</small></div></div>'+
+   '<div class="c"><div class="seek"><span>'+esc(r.usedTxt)+'</span><div class="sk '+cls+'"><i id="skf" style="width:'+w+'%"></i></div><span class="cdv">'+esc(left)+'</span></div></div>'+
+   '<div class="r"><div class="eqb"><i></i><i></i><i></i><i></i></div><span class="cl2">'+(r.tot>0?Math.round(r.pct)+'% из '+esc(r.tTxt):'без лимита')+'</span><button class="cbtn" id="npc" title="Копировать подписку" aria-label="Копировать подписку">'+svg(IC.copy)+'</button><button class="cbtn" id="npq" title="QR" aria-label="QR">'+svg(IC.qr)+'</button></div>';
+  $('npc').onclick=function(){ if(URLROWS.length) copy(URLROWS[SUBTAB][2],this); };
+  $('npq').onclick=function(){ if(URLROWS.length) openQR(URLROWS[SUBTAB][2],'QR · '+URLROWS[SUBTAB][0],'#1ed760'); };
+  if(npFirst){ npFirst=false; setTimeout(function(){ var f=$('skf'); if(f) f.style.width=pct.toFixed(1)+'%'; },500); }
+}
+function renderApps(){
+  $('apps').innerHTML=APPS.map(function(a){ return '<a class="app-c" href="'+esc(a[2])+'">'+appIcon(a[1])+'<b>'+a[0]+'</b></a>'; }).join('')||'<div class="empty">Адрес подписки недоступен</div>';
+}
+function trackHtml(it,n,showCC){
+  var tags=['<span class="tag">'+esc(it.proto)+'</span>','<span class="tag sec-'+esc(it.sec)+'">'+esc(secLabel(it.sec))+'</span>'];
+  if(it.net) tags.push('<span class="tag">'+esc(netLabel(it.net))+'</span>');
+  if(showCC&&it.cc) tags.push('<span>'+esc(ccName(it.cc))+'</span>');
+  if(it.port) tags.push('<span class="pt2 mono" style="font-size:12px">:'+esc(it.port)+'</span>');
+  return '<div class="tr'+(S.open[it.idx]?' open':'')+'" style="--pc:'+it.pc+'"><div class="tm"><div class="no"><s>'+n+'</s>'+PLAYI+'</div>'+
+   '<div class="tt" data-tog="'+it.idx+'"><div class="tdot">'+esc(it.proto.slice(0,2).toUpperCase())+'</div><div class="tn"><b title="'+esc(it.remark||it.name)+'">'+esc(it.name)+'</b><div class="tg">'+tags.join('')+'</div></div></div>'+
+   '<div class="pt">'+(it.port?':'+esc(it.port):'')+'</div>'+
+   '<div class="ab"><button class="cbtn" data-c="'+it.idx+'" title="Скопировать ссылку" aria-label="Скопировать ссылку">'+svg(IC.copy)+'</button><button class="cbtn" data-q="'+it.idx+'" title="QR" aria-label="QR">'+svg(IC.qr)+'</button><button class="cbtn tg" data-tog="'+it.idx+'" title="Подробнее" aria-label="Подробнее">'+svg(IC.chev)+'</button></div></div>'+
+   '<div class="detail"><div class="inn"><div class="pad"><div class="kv">'+detailKV(it).map(function(x){return '<div><span>'+esc(x[0])+'</span><b>'+esc(x[1])+'</b></div>';}).join('')+'</div><div class="rawl">'+esc(it.raw)+'</div></div></div></div></div>';
+}
+function plVisible(){ var l=visible(); return PL===null?l:l.filter(function(x){return x.host===PL;}); }
+function renderChips(){ $('chips').innerHTML=chipsHtml(); $('chips').style.display=$('chips').innerHTML?'':'none'; }
+function renderGroups(){
+  var list=plVisible();
+  $('lh').textContent=PL===null?'Все треки':(ccName((hosts().filter(function(x){return x.host===PL;})[0]||{}).cc)||PL);
+  $('invsum').textContent=list.length+' из '+items.length;
+  if(!list.length){ $('groups').innerHTML='<div class="empty">'+(items.length?'Ничего не найдено':'В подписке пока нет подключений')+'</div>'; return; }
+  var n=0;
+  if(PL!==null){ $('groups').innerHTML=list.map(function(it){return trackHtml(it,++n,false);}).join(''); return; }
+  var gs=groups(list);
+  $('groups').innerHTML=gs.map(function(g){ var hd=S.g==='list'?'':'<div class="gh">'+(S.g==='proto'?'<span class="tdot" style="width:14px;height:14px;border-radius:50%;background:'+P[g.pk][1]+'"></span>'+esc(P[g.pk][0]):flagC(g.cc)+esc(ccName(g.cc))+'<small>'+esc(g.host||'')+'</small>')+'</div>'; return hd+g.items.map(function(it){return trackHtml(it,++n,S.g==='proto'||S.g==='list');}).join(''); }).join('');
+}
+function bindGroups(){
+  S.g='node';
+  $('groups').onclick=function(e){
+    var b=e.target.closest('button');
+    if(b&&b.dataset.c!==undefined){ copy(items[b.dataset.c].raw,b); return; }
+    if(b&&b.dataset.q!==undefined){ var it=items[b.dataset.q]; openQR(it.raw,it.proto+' · '+it.name,it.pc); return; }
+    var t=e.target.closest('[data-tog]'); if(t){ var i=t.dataset.tog; S.open[i]=!S.open[i]; t.closest('.tr').classList.toggle('open'); }
+  };
+  $('pls').onclick=function(e){ var b=e.target.closest('.pl'); if(!b) return; PL=b.dataset.pl||null; renderPls(); renderNP(); renderTop(false); renderGroups(); if(window.innerWidth<=980){ var s=$('lh'); s.scrollIntoView({behavior:'smooth',block:'start'}); } };
+  $('chips').onclick=function(e){ chipClick(e,function(){ renderChips(); renderGroups(); }); };
+  $('q').oninput=function(){ S.q=this.value; renderGroups(); };
+  $('copyall').onclick=function(){ copyAllOf(plVisible(),this); };
+}
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){ closeQR(); return; }
+  var tg=(e.target.tagName||'').toLowerCase();
+  if(e.key==='/'&&tg!=='input'&&tg!=='textarea'){ e.preventDefault(); $('q').focus(); }
+});
+
+headCommon(); loadItems(); buildSub(); bindQR(); bindGroups();
+renderPls(); renderTop(true); renderNP(); renderApps(); renderChips(); renderGroups();
+
+/* ---------------------------------------------------------------------------- тема */
+(function(){
+  var th='dark';
+  try{ th=localStorage.getItem('sub-theme')||''; }catch(e){}
+  if(th!=='dark'&&th!=='light') th=(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';
+  document.documentElement.setAttribute('data-theme',th);
+  $('theme').onclick=function(){
+    th=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+    document.documentElement.setAttribute('data-theme',th); try{ localStorage.setItem('sub-theme',th); }catch(e){}
+  };
+})();
+
+/* живое обновление трафика и статуса */
+function refresh(){
+  if(document.hidden) return;
+  try{
+    var u=new URL(location.href); u.searchParams.set('format','info');
+    fetch(u.toString(),{headers:{'Accept':'application/json'},cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(j){
+      if(!j||typeof j!=='object') return; var ch=false;
+      ['enabled','download','upload','total','used','remained','expire','lastOnline','isOnline','downloadByte','uploadByte','totalByte'].forEach(function(k){
+        if(j[k]!==undefined&&j[k]!==null&&j[k]!==D[k]){ D[k]=j[k]; ch=true; } });
+      if(ch) renderHero();
+    }).catch(function(){});
+  }catch(e){}
+}
+setInterval(refresh,30000);
+})();
+</script>
+</body>
+</html>
